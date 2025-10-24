@@ -351,6 +351,8 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
 
 public static class Game {
     public static Form TitleForm { get; set; }
+    public static Form GameForm { get; set; }
+    public static Form SettingsForm { get; set; }
     public static Deck Deck { get; private set; }
     public static Dictionary<Suit, FoundationStack> FoundationStacks { get; set; }
     public static TableauStack[] TableauStacks;
