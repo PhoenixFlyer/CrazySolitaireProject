@@ -237,6 +237,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         c.PicBox.BringToFront();
         Panel.Refresh();
         c.PicBox.BringToFront();
+        FrmGame.Instance.UpdateMoves();
     }
 
     public void DragEnded() {
@@ -332,6 +333,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Panel.AddCard(c);
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
+        FrmGame.Instance.UpdateMoves();
     }
 
     public void DragEnded() {

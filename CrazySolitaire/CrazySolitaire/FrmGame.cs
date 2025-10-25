@@ -1,4 +1,7 @@
+using Accessibility;
 using CrazySolitaire.Properties;
+using System.Diagnostics;
+using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire {
     public partial class FrmGame : Form
@@ -6,6 +9,10 @@ namespace CrazySolitaire {
         public static Card CurDragCard { get; private set; }
         public static IDragFrom CardDraggedFrom { get; private set; }
         public static FrmGame Instance { get; private set; }
+        public static Stopwatch stopwatch = new();
+        public static System.Windows.Forms.Timer stopwatchTimer = new();
+        public TimeSpan elapsed;
+        public int NumOfMoves = 0;
 
         protected override CreateParams CreateParams
         {
@@ -39,6 +46,12 @@ namespace CrazySolitaire {
                 [Suit.CLUBS] = panFoundationStack_Clubs,
             };
             Game.Init(panTalon, panTableauStacks, panFoundationStacks);
+
+            // start time
+            stopwatchTimer.Tick += new EventHandler(UpdateTime);
+            stopwatchTimer.Interval = 1000;
+            stopwatchTimer.Start();
+            stopwatch.Start();
         }
 
         private void pbStock_Click(object sender, EventArgs e)
@@ -82,6 +95,7 @@ namespace CrazySolitaire {
                     pbStock.BackgroundImage = null;
                 }
             }
+            UpdateMoves();
         }
 
         public static void DragCard(Card c)
@@ -101,6 +115,20 @@ namespace CrazySolitaire {
             Game.TitleForm.Close();
         }
 
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            elapsed = stopwatch.Elapsed;
+
+            if ((int)elapsed.Seconds < 10)
+                lblTime.Text = string.Format("{0}:0{1}", (int)elapsed.Minutes, (int)elapsed.Seconds);
+            else
+                lblTime.Text = string.Format("{0}:{1}", (int)elapsed.Minutes, (int)elapsed.Seconds);
+        }
+
+        public void UpdateMoves()
+        {
+            NumOfMoves++;
+            lblNumMoves.Text = NumOfMoves.ToString();
         private void btnSettings_Click(object sender, EventArgs e)
         {
             FrmSettings frmSettings = new();
