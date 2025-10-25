@@ -129,6 +129,7 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+        }
         private void btnSettings_Click(object sender, EventArgs e)
         {
             FrmSettings frmSettings = new();
