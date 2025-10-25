@@ -58,6 +58,7 @@
             btnRulse.TabIndex = 1;
             btnRulse.Text = "How to Play";
             btnRulse.UseVisualStyleBackColor = true;
+            btnRulse.Click += btnRulse_Click;
             // 
             // lblAutoplay
             // 
