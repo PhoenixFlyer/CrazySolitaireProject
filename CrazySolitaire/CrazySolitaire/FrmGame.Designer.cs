@@ -44,6 +44,7 @@
             lblTime = new Label();
             lblMoves = new Label();
             lblNumMoves = new Label();
+            btnSettings = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -56,6 +57,10 @@
             pbStock.Margin = new Padding(3, 4, 3, 4);
             pbStock.Name = "pbStock";
             pbStock.Size = new Size(102, 167);
+            pbStock.Location = new Point(57, 45);
+            pbStock.Margin = new Padding(4, 5, 4, 5);
+            pbStock.Name = "pbStock";
+            pbStock.Size = new Size(127, 207);
             pbStock.TabIndex = 0;
             pbStock.TabStop = false;
             pbStock.Click += pbStock_Click;
@@ -66,6 +71,10 @@
             panTalon.Margin = new Padding(3, 4, 3, 4);
             panTalon.Name = "panTalon";
             panTalon.Size = new Size(190, 168);
+            panTalon.Location = new Point(229, 45);
+            panTalon.Margin = new Padding(4, 5, 4, 5);
+            panTalon.Name = "panTalon";
+            panTalon.Size = new Size(237, 210);
             panTalon.TabIndex = 1;
             // 
             // panFoundationStack_Clubs
@@ -207,6 +216,25 @@
             Controls.Add(lblNumMoves);
             Controls.Add(lblMoves);
             Controls.Add(lblTime);
+            // 
+            // btnSettings
+            // 
+            btnSettings.BackColor = Color.Transparent;
+            btnSettings.Image = Properties.Resources.GearIcon;
+            btnSettings.Location = new Point(1259, 995);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(123, 116);
+            btnSettings.TabIndex = 6;
+            btnSettings.UseVisualStyleBackColor = false;
+            btnSettings.Click += btnSettings_Click;
+            // 
+            // FrmGame
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(0, 64, 0);
+            ClientSize = new Size(1394, 1123);
+            Controls.Add(btnSettings);
             Controls.Add(panTableauStack_6);
             Controls.Add(panTableauStack_5);
             Controls.Add(panTableauStack_4);
@@ -248,5 +276,6 @@
         private Label lblTime;
         private Label lblMoves;
         private Label lblNumMoves;
+        private Button btnSettings;
     }
 }

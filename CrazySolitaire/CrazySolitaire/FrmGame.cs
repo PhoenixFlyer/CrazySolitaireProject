@@ -31,6 +31,7 @@ namespace CrazySolitaire {
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Game.GameForm = this;
             Instance = this;
             Panel[] panTableauStacks = new Panel[7];
             for (int i = 0; i < 7; i++)
@@ -128,6 +129,10 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            FrmSettings frmSettings = new();
+            frmSettings.Show();
         }
     }
 }
