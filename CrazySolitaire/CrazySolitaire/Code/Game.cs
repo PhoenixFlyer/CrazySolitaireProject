@@ -109,9 +109,10 @@ public class Card {
             BackgroundImage = PicImg
         };
         PicBox.Click += (sender, e) => {
-            if (!FaceUp && Game.CanFlipOver(this)) {
+            // getting rid of this to add autoplay feature on card click
+            /* if (!FaceUp && Game.CanFlipOver(this)) {
                 FlipOver();
-            }
+            } */
         };
         PicBox.MouseDown += (sender, e) => {
             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
@@ -134,6 +135,7 @@ public class Card {
                     FrmGame.CardDraggedFrom.RemCard(this);
                     lastDropTarget.Dropped(this);
                     PicBox.BringToFront();
+                    Game.FlipOver();
                 }
                 else {
                     FrmGame.Instance.RemCard(this);
@@ -451,13 +453,25 @@ public static class Game {
         }
     }
 
-    public static bool CanFlipOver(Card c) {
+    // getting rid of this to automatically flip over a card
+    /*public static bool CanFlipOver(Card c) {
         foreach (var tableauStack in TableauStacks) {
             if (tableauStack.GetBottomCard() == c) {
                 return true;
             }
         }
         return false;
+    }*/
+
+    public static void FlipOver() { 
+        foreach (var tableauStack in TableauStacks) {
+            Card c = tableauStack.GetBottomCard();
+            if (!c.FaceUp)
+            {
+                c.FlipOver();
+            }
+
+        }
     }
 
     public static void Explode() {
