@@ -11,7 +11,8 @@ namespace CrazySolitaire {
         public static FrmGame Instance { get; private set; }
         public static Stopwatch stopwatch = new();
         public static System.Windows.Forms.Timer stopwatchTimer = new();
-        TimeSpan elapsed;
+        public TimeSpan elapsed;
+        public int NumOfMoves = 0;
 
         protected override CreateParams CreateParams
         {
@@ -46,7 +47,7 @@ namespace CrazySolitaire {
             Game.Init(panTalon, panTableauStacks, panFoundationStacks);
 
             // start time
-            stopwatchTimer.Tick += new EventHandler(UpdateStopwatch);
+            stopwatchTimer.Tick += new EventHandler(UpdateTime);
             stopwatchTimer.Interval = 1000;
             stopwatchTimer.Start();
             stopwatch.Start();
@@ -93,6 +94,7 @@ namespace CrazySolitaire {
                     pbStock.BackgroundImage = null;
                 }
             }
+            UpdateMoves();
         }
 
         public static void DragCard(Card c)
@@ -111,8 +113,8 @@ namespace CrazySolitaire {
         {
             Game.TitleForm.Close();
         }
-        
-        public void UpdateStopwatch(object sender, EventArgs e)
+
+        private void UpdateTime(object sender, EventArgs e)
         {
             elapsed = stopwatch.Elapsed;
 
@@ -120,6 +122,12 @@ namespace CrazySolitaire {
                 lblTime.Text = string.Format("{0}:0{1}", (int)elapsed.Minutes, (int)elapsed.Seconds);
             else
                 lblTime.Text = string.Format("{0}:{1}", (int)elapsed.Minutes, (int)elapsed.Seconds);
+        }
+
+        public void UpdateMoves()
+        {
+            NumOfMoves++;
+            lblNumMoves.Text = NumOfMoves.ToString();
         }
     }
 }

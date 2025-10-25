@@ -42,6 +42,8 @@
             panTableauStack_5 = new Panel();
             panTableauStack_6 = new Panel();
             lblTime = new Label();
+            lblMoves = new Label();
+            lblNumMoves = new Label();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -171,11 +173,30 @@
             // lblTime
             // 
             lblTime.Font = new Font("Old English Text MT", 26F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTime.Location = new Point(953, 14);
+            lblTime.Location = new Point(904, 14);
             lblTime.Name = "lblTime";
-            lblTime.Size = new Size(134, 64);
+            lblTime.RightToLeft = RightToLeft.Yes;
+            lblTime.Size = new Size(141, 64);
             lblTime.TabIndex = 6;
             lblTime.Text = "0:00";
+            // 
+            // lblMoves
+            // 
+            lblMoves.Font = new Font("Old English Text MT", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMoves.Location = new Point(46, 14);
+            lblMoves.Name = "lblMoves";
+            lblMoves.Size = new Size(165, 64);
+            lblMoves.TabIndex = 7;
+            lblMoves.Text = "Moves: ";
+            // 
+            // lblNumMoves
+            // 
+            lblNumMoves.Font = new Font("Old English Text MT", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNumMoves.Location = new Point(193, 14);
+            lblNumMoves.Name = "lblNumMoves";
+            lblNumMoves.Size = new Size(180, 64);
+            lblNumMoves.TabIndex = 8;
+            lblNumMoves.Text = "0";
             // 
             // FrmGame
             // 
@@ -183,6 +204,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(1115, 899);
+            Controls.Add(lblNumMoves);
+            Controls.Add(lblMoves);
             Controls.Add(lblTime);
             Controls.Add(panTableauStack_6);
             Controls.Add(panTableauStack_5);
@@ -223,5 +246,7 @@
         private Panel panTableauStack_5;
         private Panel panTableauStack_6;
         private Label lblTime;
+        private Label lblMoves;
+        private Label lblNumMoves;
     }
 }
