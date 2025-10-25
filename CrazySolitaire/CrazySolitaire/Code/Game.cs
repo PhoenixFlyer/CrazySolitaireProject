@@ -113,6 +113,8 @@ public class Card {
             /* if (!FaceUp && Game.CanFlipOver(this)) {
                 FlipOver();
             } */
+
+            // adding autoplay
         };
         PicBox.MouseDown += (sender, e) => {
             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
@@ -466,7 +468,7 @@ public static class Game {
     public static void FlipOver() { 
         foreach (var tableauStack in TableauStacks) {
             Card c = tableauStack.GetBottomCard();
-            if (!c.FaceUp)
+            if (c != null && !c.FaceUp)
             {
                 c.FlipOver();
             }
