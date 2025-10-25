@@ -1,4 +1,5 @@
 ﻿using CrazySolitaire.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire;
@@ -108,11 +109,55 @@ public class Card {
             BorderStyle = BorderStyle.FixedSingle,
             BackgroundImage = PicImg
         };
-        PicBox.Click += (sender, e) => {
-            if (!FaceUp && Game.CanFlipOver(this)) {
-                FlipOver();
+
+        PicBox.MouseClick += (sender, e) => {
+            // adding autoplay
+            if (FrmGame.autoplay && Game.IsCardMovable(this) && e.Button == MouseButtons.Left)
+            {
+                FrmGame.DragCard(this);
+                dragOffset = e.Location;
+                conBeforeDrag = PicBox.Parent;
+                relLocBeforeDrag = PicBox.Location;
+                conBeforeDrag.RemCard(this);
+                FrmGame.Instance.AddCard(this);
+                PicBox.Location = e.Location;
+                PicBox.BringToFront();
+
+                var curCard = (Control)sender;
+
+                foreach (Control target in FrmGame.Instance.Controls)
+                {
+                    if (target is not null && target != curCard)
+                    {
+                        var dropTarget = Game.FindDropTarget(target);
+                        if (dropTarget is not null && dropTarget.CanDrop(this))
+                        {
+                            FrmGame.CardDraggedFrom.RemCard(this);
+                            dropTarget.Dropped(this);
+                            PicBox.BringToFront();
+                            Game.FlipOver();
+                            break;
+                        }
+                        else
+                        {
+                            FrmGame.Instance.RemCard(this);
+                            conBeforeDrag?.AddCard(this);
+                            PicBox.Location = relLocBeforeDrag;
+                            PicBox.BringToFront();
+                        }
+                    }
+                }
+                FrmGame.StopDragCard(this);
+                Game.CallDragEndedOnAll();
             }
         };
+        /*
+        PicBox.Click += (sender, e) => {
+            // getting rid of this to add autoplay feature on card click
+            if (!FaceUp && Game.CanFlipOver(this)) {
+                FlipOver();
+            } 
+        };*/
         PicBox.MouseDown += (sender, e) => {
             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
                 FrmGame.DragCard(this);
@@ -134,6 +179,7 @@ public class Card {
                     FrmGame.CardDraggedFrom.RemCard(this);
                     lastDropTarget.Dropped(this);
                     PicBox.BringToFront();
+                    Game.FlipOver();
                 }
                 else {
                     FrmGame.Instance.RemCard(this);
@@ -237,6 +283,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         c.PicBox.BringToFront();
         Panel.Refresh();
         c.PicBox.BringToFront();
+        FrmGame.Instance.UpdateMoves();
     }
 
     public void DragEnded() {
@@ -332,6 +379,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Panel.AddCard(c);
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
+        FrmGame.Instance.UpdateMoves();
     }
 
     public void DragEnded() {
@@ -351,6 +399,8 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
 
 public static class Game {
     public static Form TitleForm { get; set; }
+    public static Form GameForm { get; set; }
+    public static Form SettingsForm { get; set; }
     public static Deck Deck { get; private set; }
     public static Dictionary<Suit, FoundationStack> FoundationStacks { get; set; }
     public static TableauStack[] TableauStacks;
@@ -447,13 +497,25 @@ public static class Game {
         }
     }
 
-    public static bool CanFlipOver(Card c) {
+    // getting rid of this to automatically flip over a card
+    /*public static bool CanFlipOver(Card c) {
         foreach (var tableauStack in TableauStacks) {
             if (tableauStack.GetBottomCard() == c) {
                 return true;
             }
         }
         return false;
+    }*/
+
+    public static void FlipOver() { 
+        foreach (var tableauStack in TableauStacks) {
+            Card c = tableauStack.GetBottomCard();
+            if (c != null && !c.FaceUp)
+            {
+                c.FlipOver();
+            }
+
+        }
     }
 
     public static void Explode() {

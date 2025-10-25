@@ -26,7 +26,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             pbStock = new PictureBox();
             panTalon = new Panel();
             panFoundationStack_Clubs = new Panel();
@@ -40,6 +41,10 @@
             panTableauStack_4 = new Panel();
             panTableauStack_5 = new Panel();
             panTableauStack_6 = new Panel();
+            lblTime = new Label();
+            lblMoves = new Label();
+            lblNumMoves = new Label();
+            btnSettings = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -48,18 +53,20 @@
             pbStock.BackgroundImage = Properties.Resources.back_green;
             pbStock.BackgroundImageLayout = ImageLayout.Stretch;
             pbStock.BorderStyle = BorderStyle.Fixed3D;
-            pbStock.Location = new Point(40, 27);
+            pbStock.Location = new Point(46, 71);
+            pbStock.Margin = new Padding(3, 4, 3, 4);
             pbStock.Name = "pbStock";
-            pbStock.Size = new Size(90, 126);
+            pbStock.Size = new Size(102, 166);
             pbStock.TabIndex = 0;
             pbStock.TabStop = false;
             pbStock.Click += pbStock_Click;
             // 
             // panTalon
             // 
-            panTalon.Location = new Point(160, 27);
+            panTalon.Location = new Point(175, 71);
+            panTalon.Margin = new Padding(3, 4, 3, 4);
             panTalon.Name = "panTalon";
-            panTalon.Size = new Size(166, 126);
+            panTalon.Size = new Size(190, 168);
             panTalon.TabIndex = 1;
             // 
             // panFoundationStack_Clubs
@@ -68,9 +75,10 @@
             panFoundationStack_Clubs.BackgroundImage = Properties.Resources.FoundationStackBg_Clubs;
             panFoundationStack_Clubs.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Clubs.BorderStyle = BorderStyle.FixedSingle;
-            panFoundationStack_Clubs.Location = new Point(427, 26);
+            panFoundationStack_Clubs.Location = new Point(390, 71);
+            panFoundationStack_Clubs.Margin = new Padding(2, 3, 2, 3);
             panFoundationStack_Clubs.Name = "panFoundationStack_Clubs";
-            panFoundationStack_Clubs.Size = new Size(100, 126);
+            panFoundationStack_Clubs.Size = new Size(92, 134);
             panFoundationStack_Clubs.TabIndex = 2;
             // 
             // panFoundationStack_Hearts
@@ -78,9 +86,10 @@
             panFoundationStack_Hearts.BackgroundImage = Properties.Resources.FoundationStackBg_Hearts;
             panFoundationStack_Hearts.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Hearts.BorderStyle = BorderStyle.FixedSingle;
-            panFoundationStack_Hearts.Location = new Point(556, 27);
+            panFoundationStack_Hearts.Location = new Point(508, 71);
+            panFoundationStack_Hearts.Margin = new Padding(2, 3, 2, 3);
             panFoundationStack_Hearts.Name = "panFoundationStack_Hearts";
-            panFoundationStack_Hearts.Size = new Size(100, 126);
+            panFoundationStack_Hearts.Size = new Size(92, 134);
             panFoundationStack_Hearts.TabIndex = 3;
             // 
             // panFoundationStack_Spades
@@ -88,9 +97,10 @@
             panFoundationStack_Spades.BackgroundImage = Properties.Resources.FoundationStackBg_Spades;
             panFoundationStack_Spades.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Spades.BorderStyle = BorderStyle.FixedSingle;
-            panFoundationStack_Spades.Location = new Point(685, 27);
+            panFoundationStack_Spades.Location = new Point(626, 71);
+            panFoundationStack_Spades.Margin = new Padding(2, 3, 2, 3);
             panFoundationStack_Spades.Name = "panFoundationStack_Spades";
-            panFoundationStack_Spades.Size = new Size(100, 126);
+            panFoundationStack_Spades.Size = new Size(92, 134);
             panFoundationStack_Spades.TabIndex = 3;
             // 
             // panFoundationStack_Diamonds
@@ -98,67 +108,122 @@
             panFoundationStack_Diamonds.BackgroundImage = Properties.Resources.FoundationStackBg_Diamonds;
             panFoundationStack_Diamonds.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Diamonds.BorderStyle = BorderStyle.FixedSingle;
-            panFoundationStack_Diamonds.Location = new Point(814, 27);
+            panFoundationStack_Diamonds.Location = new Point(744, 71);
+            panFoundationStack_Diamonds.Margin = new Padding(2, 3, 2, 3);
             panFoundationStack_Diamonds.Name = "panFoundationStack_Diamonds";
-            panFoundationStack_Diamonds.Size = new Size(100, 126);
+            panFoundationStack_Diamonds.Size = new Size(92, 134);
             panFoundationStack_Diamonds.TabIndex = 3;
             // 
             // panTableauStack_0
             // 
             panTableauStack_0.AllowDrop = true;
-            panTableauStack_0.Location = new Point(40, 254);
+            panTableauStack_0.Location = new Point(37, 319);
+            panTableauStack_0.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_0.Name = "panTableauStack_0";
-            panTableauStack_0.Size = new Size(101, 306);
+            panTableauStack_0.Size = new Size(92, 326);
             panTableauStack_0.TabIndex = 4;
             // 
             // panTableauStack_1
             // 
-            panTableauStack_1.Location = new Point(169, 254);
+            panTableauStack_1.Location = new Point(154, 319);
+            panTableauStack_1.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_1.Name = "panTableauStack_1";
-            panTableauStack_1.Size = new Size(101, 306);
+            panTableauStack_1.Size = new Size(92, 326);
             panTableauStack_1.TabIndex = 5;
             // 
             // panTableauStack_2
             // 
-            panTableauStack_2.Location = new Point(298, 254);
+            panTableauStack_2.Location = new Point(273, 319);
+            panTableauStack_2.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_2.Name = "panTableauStack_2";
-            panTableauStack_2.Size = new Size(101, 306);
+            panTableauStack_2.Size = new Size(92, 326);
             panTableauStack_2.TabIndex = 5;
             // 
             // panTableauStack_3
             // 
-            panTableauStack_3.Location = new Point(427, 254);
+            panTableauStack_3.Location = new Point(390, 319);
+            panTableauStack_3.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_3.Name = "panTableauStack_3";
-            panTableauStack_3.Size = new Size(101, 306);
+            panTableauStack_3.Size = new Size(92, 326);
             panTableauStack_3.TabIndex = 5;
             // 
             // panTableauStack_4
             // 
-            panTableauStack_4.Location = new Point(556, 254);
+            panTableauStack_4.Location = new Point(508, 319);
+            panTableauStack_4.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_4.Name = "panTableauStack_4";
-            panTableauStack_4.Size = new Size(101, 306);
+            panTableauStack_4.Size = new Size(92, 326);
             panTableauStack_4.TabIndex = 5;
             // 
             // panTableauStack_5
             // 
-            panTableauStack_5.Location = new Point(685, 254);
+            panTableauStack_5.Location = new Point(626, 319);
+            panTableauStack_5.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_5.Name = "panTableauStack_5";
-            panTableauStack_5.Size = new Size(101, 306);
+            panTableauStack_5.Size = new Size(92, 326);
             panTableauStack_5.TabIndex = 5;
             // 
             // panTableauStack_6
             // 
-            panTableauStack_6.Location = new Point(814, 254);
+            panTableauStack_6.Location = new Point(744, 319);
+            panTableauStack_6.Margin = new Padding(2, 3, 2, 3);
             panTableauStack_6.Name = "panTableauStack_6";
-            panTableauStack_6.Size = new Size(101, 306);
+            panTableauStack_6.Size = new Size(92, 326);
             panTableauStack_6.TabIndex = 5;
+            // 
+            // lblTime
+            // 
+            lblTime.Font = new Font("Old English Text MT", 26F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTime.Location = new Point(723, 11);
+            lblTime.Margin = new Padding(2, 0, 2, 0);
+            lblTime.Name = "lblTime";
+            lblTime.RightToLeft = RightToLeft.Yes;
+            lblTime.Size = new Size(113, 51);
+            lblTime.TabIndex = 6;
+            lblTime.Text = "0:00";
+            // 
+            // lblMoves
+            // 
+            lblMoves.Font = new Font("Old English Text MT", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMoves.Location = new Point(37, 11);
+            lblMoves.Margin = new Padding(2, 0, 2, 0);
+            lblMoves.Name = "lblMoves";
+            lblMoves.Size = new Size(170, 51);
+            lblMoves.TabIndex = 7;
+            lblMoves.Text = "Moves: ";
+            // 
+            // lblNumMoves
+            // 
+            lblNumMoves.Font = new Font("Old English Text MT", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNumMoves.Location = new Point(186, 11);
+            lblNumMoves.Margin = new Padding(2, 0, 2, 0);
+            lblNumMoves.Name = "lblNumMoves";
+            lblNumMoves.Size = new Size(144, 51);
+            lblNumMoves.TabIndex = 8;
+            lblNumMoves.Text = "0";
+            // 
+            // btnSettings
+            // 
+            btnSettings.BackColor = Color.Transparent;
+            btnSettings.Image = Properties.Resources.GearIcon;
+            btnSettings.Location = new Point(1006, 740);
+            btnSettings.Margin = new Padding(2);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(98, 93);
+            btnSettings.TabIndex = 6;
+            btnSettings.UseVisualStyleBackColor = false;
+            btnSettings.Click += btnSettings_Click;
             // 
             // FrmGame
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
-            ClientSize = new Size(976, 674);
+            ClientSize = new Size(1115, 844);
+            Controls.Add(lblNumMoves);
+            Controls.Add(lblMoves);
+            Controls.Add(lblTime);
+            Controls.Add(btnSettings);
             Controls.Add(panTableauStack_6);
             Controls.Add(panTableauStack_5);
             Controls.Add(panTableauStack_4);
@@ -172,6 +237,7 @@
             Controls.Add(panFoundationStack_Clubs);
             Controls.Add(panTalon);
             Controls.Add(pbStock);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "FrmGame";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Crazy Solitaire";
@@ -196,5 +262,9 @@
         private Panel panTableauStack_4;
         private Panel panTableauStack_5;
         private Panel panTableauStack_6;
+        private Label lblTime;
+        private Label lblMoves;
+        private Label lblNumMoves;
+        private Button btnSettings;
     }
 }
