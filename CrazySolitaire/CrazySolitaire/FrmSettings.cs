@@ -15,6 +15,7 @@ namespace CrazySolitaire
         public FrmSettings()
         {
             InitializeComponent();
+            
         }
 
         private void FrmSettings_Load(object sender, EventArgs e)
@@ -25,6 +26,11 @@ namespace CrazySolitaire
         private void btnClose_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void chkAutoplay_CheckedChanged(object sender, EventArgs e)
+        {
+            FrmGame.autoplay = chkAutoplay.Checked;
         }
     }
 }

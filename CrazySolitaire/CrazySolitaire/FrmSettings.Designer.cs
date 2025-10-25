@@ -36,6 +36,7 @@
             lblAutoplayDesc = new Label();
             lblMusicDesc = new Label();
             lblModeDesc = new Label();
+            chkAutoplay = new CheckBox();
             SuspendLayout();
             // 
             // btnClose
@@ -118,6 +119,17 @@
             lblModeDesc.TabIndex = 7;
             lblModeDesc.Text = "Dark/Light";
             // 
+            // chkAutoplay
+            // 
+            chkAutoplay.AutoSize = true;
+            chkAutoplay.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkAutoplay.Location = new Point(313, 99);
+            chkAutoplay.Name = "chkAutoplay";
+            chkAutoplay.Size = new Size(22, 21);
+            chkAutoplay.TabIndex = 8;
+            chkAutoplay.UseVisualStyleBackColor = true;
+            chkAutoplay.CheckedChanged += chkAutoplay_CheckedChanged;
+            // 
             // FrmSettings
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -125,6 +137,7 @@
             BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(1000, 800);
             ControlBox = false;
+            Controls.Add(chkAutoplay);
             Controls.Add(lblModeDesc);
             Controls.Add(lblMusicDesc);
             Controls.Add(lblAutoplayDesc);
@@ -154,5 +167,6 @@
         private Label lblAutoplayDesc;
         private Label lblMusicDesc;
         private Label lblModeDesc;
+        private CheckBox chkAutoplay;
     }
 }

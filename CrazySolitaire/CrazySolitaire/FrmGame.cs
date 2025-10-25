@@ -13,7 +13,7 @@ namespace CrazySolitaire {
         public static System.Windows.Forms.Timer stopwatchTimer = new();
         public TimeSpan elapsed;
         public int NumOfMoves = 0;
-        public bool autoplay = false;
+        public static bool autoplay = false;
 
         protected override CreateParams CreateParams
         {

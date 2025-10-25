@@ -1,4 +1,5 @@
 ﻿using CrazySolitaire.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire;
@@ -108,14 +109,55 @@ public class Card {
             BorderStyle = BorderStyle.FixedSingle,
             BackgroundImage = PicImg
         };
+
+        PicBox.MouseClick += (sender, e) => {
+            // adding autoplay
+            if (FrmGame.autoplay && Game.IsCardMovable(this) && e.Button == MouseButtons.Left)
+            {
+                FrmGame.DragCard(this);
+                dragOffset = e.Location;
+                conBeforeDrag = PicBox.Parent;
+                relLocBeforeDrag = PicBox.Location;
+                conBeforeDrag.RemCard(this);
+                FrmGame.Instance.AddCard(this);
+                PicBox.Location = e.Location;
+                PicBox.BringToFront();
+
+                var curCard = (Control)sender;
+
+                foreach (Control target in FrmGame.Instance.Controls)
+                {
+                    if (target is not null && target != curCard)
+                    {
+                        var dropTarget = Game.FindDropTarget(target);
+                        if (dropTarget is not null && dropTarget.CanDrop(this))
+                        {
+                            FrmGame.CardDraggedFrom.RemCard(this);
+                            dropTarget.Dropped(this);
+                            PicBox.BringToFront();
+                            Game.FlipOver();
+                            break;
+                        }
+                        else
+                        {
+                            FrmGame.Instance.RemCard(this);
+                            conBeforeDrag?.AddCard(this);
+                            PicBox.Location = relLocBeforeDrag;
+                            PicBox.BringToFront();
+                        }
+                    }
+                }
+                FrmGame.StopDragCard(this);
+                Game.CallDragEndedOnAll();
+            }
+        };
+        /*
         PicBox.Click += (sender, e) => {
             // getting rid of this to add autoplay feature on card click
-            /* if (!FaceUp && Game.CanFlipOver(this)) {
+            if (!FaceUp && Game.CanFlipOver(this)) {
                 FlipOver();
-            } */
-
-            // adding autoplay
-        };
+            } 
+        };*/
         PicBox.MouseDown += (sender, e) => {
             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
                 FrmGame.DragCard(this);
