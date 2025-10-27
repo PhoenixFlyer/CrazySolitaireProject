@@ -38,5 +38,16 @@ namespace CrazySolitaire
             FrmRules rules = new();
             rules.Show();
         }
+
+        private void lblMusic_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MusicChk_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MusicChk.Checked) Game.MySoundPlayer.Play();
+            else Game.MySoundPlayer.Stop();
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using CrazySolitaire.Properties;
+using System.Drawing.Text;
+using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Timer = System.Windows.Forms.Timer;
 
@@ -407,8 +409,12 @@ public static class Game {
     public static Talon Talon { get; set; }
     public static int StockReloadCount { get; set; }
 
+    public static SoundPlayer MySoundPlayer;
+
     static Game() {
         StockReloadCount = 0;
+        MySoundPlayer = new SoundPlayer();
+        MySoundPlayer.Stream = CrazySolitaire.Properties.Resources.Balatro;
     }
 
     public static void Init(Panel panTalon, Panel[] panTableauStacks, Dictionary<Suit, Panel> panFoundationStacks) {
@@ -443,6 +449,7 @@ public static class Game {
             c.AdjustLocation(0, i * VERT_OFFSET);
             TableauStacks[i].AddCard(c);
         }
+        MySoundPlayer.Play();
     }
 
     public static bool IsCardMovable(Card c) {
