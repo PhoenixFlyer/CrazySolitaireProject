@@ -38,6 +38,7 @@
             lblModeDesc = new Label();
             chkAutoplay = new CheckBox();
             MusicChk = new CheckBox();
+            DarkModeChk = new CheckBox();
             SuspendLayout();
             // 
             // btnClose
@@ -95,9 +96,9 @@
             lblMode.Location = new Point(38, 168);
             lblMode.Margin = new Padding(2, 0, 2, 0);
             lblMode.Name = "lblMode";
-            lblMode.Size = new Size(128, 25);
+            lblMode.Size = new Size(112, 25);
             lblMode.TabIndex = 4;
-            lblMode.Text = "Theme Mode";
+            lblMode.Text = "Dark Mode";
             lblMode.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblAutoplayDesc
@@ -116,9 +117,9 @@
             lblMusicDesc.Location = new Point(38, 134);
             lblMusicDesc.Margin = new Padding(2, 0, 2, 0);
             lblMusicDesc.Name = "lblMusicDesc";
-            lblMusicDesc.Size = new Size(67, 15);
+            lblMusicDesc.Size = new Size(77, 15);
             lblMusicDesc.TabIndex = 6;
-            lblMusicDesc.Text = "Add music ";
+            lblMusicDesc.Text = "Toggle Music";
             // 
             // lblModeDesc
             // 
@@ -156,6 +157,18 @@
             MusicChk.UseVisualStyleBackColor = true;
             MusicChk.CheckedChanged += MusicChk_CheckedChanged;
             // 
+            // DarkModeChk
+            // 
+            DarkModeChk.AutoSize = true;
+            DarkModeChk.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DarkModeChk.Location = new Point(219, 179);
+            DarkModeChk.Margin = new Padding(2);
+            DarkModeChk.Name = "DarkModeChk";
+            DarkModeChk.Size = new Size(15, 14);
+            DarkModeChk.TabIndex = 10;
+            DarkModeChk.UseVisualStyleBackColor = true;
+            DarkModeChk.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // FrmSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -163,6 +176,7 @@
             BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(700, 480);
             ControlBox = false;
+            Controls.Add(DarkModeChk);
             Controls.Add(MusicChk);
             Controls.Add(chkAutoplay);
             Controls.Add(lblModeDesc);
@@ -197,5 +211,6 @@
         private Label lblModeDesc;
         private CheckBox chkAutoplay;
         private CheckBox MusicChk;
+        private CheckBox DarkModeChk;
     }
 }

@@ -1,6 +1,7 @@
 using Accessibility;
 using CrazySolitaire.Properties;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire {
@@ -14,6 +15,7 @@ namespace CrazySolitaire {
         public TimeSpan elapsed;
         public int NumOfMoves = 0;
         public static bool autoplay = false;
+        public static int test = 0;
 
         protected override CreateParams CreateParams
         {

@@ -49,5 +49,22 @@ namespace CrazySolitaire
             if (MusicChk.Checked) Game.MySoundPlayer.Play();
             else Game.MySoundPlayer.Stop();
         }
+
+        // This is the dark mode check, for whatever reason the form breaks if I change this function name
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DarkModeChk.Checked) // Dark mode
+            { 
+                FrmGame.Instance.BackColor = Color.FromArgb(255, 0, 16, 0);
+                FrmGame.Instance.lblTime.ForeColor = Color.White;
+                FrmGame.Instance.lblMoves.ForeColor = Color.White;
+            }
+            else // light mode
+            { 
+                FrmGame.Instance.BackColor = Color.FromArgb(255, 0, 64, 0);
+                FrmGame.Instance.lblTime.ForeColor = Color.Black;
+                FrmGame.Instance.lblMoves.ForeColor = Color.Black;
+            }
+        }
     }
 }

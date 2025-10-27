@@ -275,8 +275,8 @@
         private Panel panTableauStack_4;
         private Panel panTableauStack_5;
         private Panel panTableauStack_6;
-        private Label lblTime;
-        private Label lblMoves;
+        public Label lblTime;
+        public Label lblMoves;
         private Label lblNumMoves;
         private Button btnSettings;
         private Button btnNewGame;
