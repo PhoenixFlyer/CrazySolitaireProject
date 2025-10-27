@@ -45,6 +45,7 @@
             lblMoves = new Label();
             lblNumMoves = new Label();
             btnSettings = new Button();
+            btnNewGame = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -209,10 +210,21 @@
             btnSettings.Location = new Point(1006, 740);
             btnSettings.Margin = new Padding(2);
             btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(98, 93);
+            btnSettings.Size = new Size(98, 98);
             btnSettings.TabIndex = 6;
             btnSettings.UseVisualStyleBackColor = false;
             btnSettings.Click += btnSettings_Click;
+            // 
+            // btnNewGame
+            // 
+            btnNewGame.Font = new Font("Old English Text MT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnNewGame.Location = new Point(883, 740);
+            btnNewGame.Name = "btnNewGame";
+            btnNewGame.Size = new Size(98, 98);
+            btnNewGame.TabIndex = 9;
+            btnNewGame.Text = "New Game";
+            btnNewGame.UseVisualStyleBackColor = true;
+            btnNewGame.Click += btnNewGame_Click;
             // 
             // FrmGame
             // 
@@ -220,6 +232,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(1115, 844);
+            Controls.Add(btnNewGame);
             Controls.Add(lblNumMoves);
             Controls.Add(lblMoves);
             Controls.Add(lblTime);
@@ -266,5 +279,6 @@
         private Label lblMoves;
         private Label lblNumMoves;
         private Button btnSettings;
+        private Button btnNewGame;
     }
 }

@@ -136,5 +136,18 @@ namespace CrazySolitaire {
             FrmSettings frmSettings = new();
             frmSettings.Show();
         }
+
+        private void btnNewGame_Click(object sender, EventArgs e)
+        {
+            NumOfMoves = 0;
+            lblNumMoves.Text = "0";
+            stopwatch.Restart();
+
+            //FrmGame game = new();
+            //Game.game = this;
+
+            //Form1_Load(sender, e);
+            //Load += Form1_Load;
+        }
     }
 }
