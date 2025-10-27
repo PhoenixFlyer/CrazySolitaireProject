@@ -16,6 +16,7 @@ namespace CrazySolitaire {
         public int NumOfMoves = 0;
         public static bool autoplay = false;
         public static int test = 0;
+        FrmSettings frmSettings = new();
 
         protected override CreateParams CreateParams
         {
@@ -135,7 +136,6 @@ namespace CrazySolitaire {
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            FrmSettings frmSettings = new();
             frmSettings.Show();
         }
 
