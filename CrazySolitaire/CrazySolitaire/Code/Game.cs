@@ -134,6 +134,8 @@ public class Card {
                         var dropTarget = Game.FindDropTarget(target);
                         if (dropTarget is not null && dropTarget.CanDrop(this))
                         {
+                            FrmGame.StopDragCard(this);
+                            Game.CallDragEndedOnAll();
                             FrmGame.CardDraggedFrom.RemCard(this);
                             dropTarget.Dropped(this);
                             PicBox.BringToFront();
@@ -527,7 +529,46 @@ public static class Game {
 
     // give a hint
     public static void GiveHint() {
-        MessageBox.Show("Hint button pressed");
+        bool endHint = false;
+        foreach (var tableauStack in TableauStacks)
+        {
+            Card curCard = tableauStack.GetBottomCard();
+            foreach (var tStack in TableauStacks)
+            {
+                Card compareCard = tStack.GetBottomCard();
+                bool suitCheck;
+                bool typeCheck;
+                if (tableauStack.Cards.Count == 0)
+                {
+                    typeCheck = curCard.Type == CardType.KING;
+                    tableauStack.Panel.BackColor = Color.Green;
+                    tStack.Panel.BackColor = Color.Green;
+                    endHint = true;
+                    break;
+                }
+                else
+                {
+                    suitCheck = ((int)compareCard.Suit % 2 != (int)curCard.Suit % 2);
+                    typeCheck = compareCard.Type == curCard.Type + 1;
+                    if (suitCheck && typeCheck)
+                    {
+                        tableauStack.Panel.BackColor = Color.Green;
+                        tStack.Panel.BackColor = Color.Green;
+                        endHint = true;
+                        break;
+                    }
+
+                }
+            }
+            if (endHint) {
+                break;
+            }
+        }
+
+        if (!endHint) {
+            MessageBox.Show("There is no moves on the board");
+        }   
+
     }
 
     public static void Explode() {
