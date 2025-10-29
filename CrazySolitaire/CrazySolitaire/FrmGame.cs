@@ -16,6 +16,7 @@ namespace CrazySolitaire {
         public int NumOfMoves = 0;
         public static bool autoplay = false;
         public static int test = 0;
+        public static int hints = 5;
         FrmSettings frmSettings = new();
 
         protected override CreateParams CreateParams
@@ -56,6 +57,8 @@ namespace CrazySolitaire {
             stopwatchTimer.Interval = 1000;
             stopwatchTimer.Start();
             stopwatch.Start();
+            // initialize num of hints
+            lblNumOfHints.Text = hints.ToString();
         }
 
         private void pbStock_Click(object sender, EventArgs e)
@@ -150,6 +153,19 @@ namespace CrazySolitaire {
 
             //Form1_Load(sender, e);
             //Load += Form1_Load;
+        }
+
+        private void btnHint_Click(object sender, EventArgs e)
+        {
+            if (hints > 0)
+            {
+                hints -= 1;
+                lblNumOfHints.Text = hints.ToString();
+                Game.GiveHint();
+            }
+            else {
+                MessageBox.Show("No more hints");            
+            }
         }
     }
 }

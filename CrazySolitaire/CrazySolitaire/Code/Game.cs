@@ -525,6 +525,11 @@ public static class Game {
         }
     }
 
+    // give a hint
+    public static void GiveHint() {
+        MessageBox.Show("Hint button pressed");
+    }
+
     public static void Explode() {
         List<Card> allCardsInPlay = new();
         foreach (var foundationStack in FoundationStacks) {
