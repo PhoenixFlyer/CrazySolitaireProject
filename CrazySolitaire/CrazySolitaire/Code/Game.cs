@@ -1,4 +1,5 @@
 ﻿using CrazySolitaire.Properties;
+using System.Diagnostics;
 using System.Drawing.Text;
 using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
@@ -87,6 +88,8 @@ public class Card {
     public Suit Suit { get; private set; }
     public bool FaceUp { get; private set; }
     public PictureBox PicBox { get; private set; }
+    public Card NextCard { get; set; }
+    public TableauStack CurrentTableau { get; set; }
     public Bitmap PicImg {
         get => FaceUp ? Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap
                       : Resources.back_green;
@@ -181,15 +184,14 @@ public class Card {
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
                     FrmGame.CardDraggedFrom.RemCard(this);
-                    lastDropTarget.Dropped(this);
-                    PicBox.BringToFront();
+                    lastDropTarget.Dropped(this);   
                     Game.FlipOver();
                 }
                 else {
                     FrmGame.Instance.RemCard(this);
                     conBeforeDrag?.AddCard(this);
                     PicBox.Location = relLocBeforeDrag;
-                    PicBox.BringToFront();
+                    if (CurrentTableau != null) CurrentTableau.SortCards();
                 }
             }
         };
@@ -255,7 +257,8 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 
     public List<Card> FindMoveableCards() {
-        return Cards.Count > 0 ? [Cards.Last.Value] : [];
+        //return Cards.Count > 0 ? [Cards.Last.Value] : [];
+        return Cards.ToList();
     }
 
     public void DragOver(Card c) {
@@ -280,14 +283,37 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 
     public void Dropped(Card c) {
+        MoveCardStack(c);
+        FrmGame.Instance.UpdateMoves();
+
+        /* Sets the nextcard value for all cards within a tableu stack
+         * This is not a fantastic spot to put this code, since with any rule changes this may break the game
+         * But within typical solitaire rules, there is absolutely no way to move multiple cards from a stack without first having
+         * dragged at least one card to that stack, so for now this works
+        */
+        for (LinkedListNode<Card> node = Cards.First; node.Next != null; node = node.Next) node.Value.NextCard = node.Next.Value;
+        SortCards();
+    }
+
+    private void MoveCardStack(Card c)
+    {
+        if (c == null) return; // Our exit case
+
+        // Actually moving the card
         Cards.AddLast(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
-        c.PicBox.BringToFront();
-        Panel.Refresh();
-        c.PicBox.BringToFront();
-        FrmGame.Instance.UpdateMoves();
+        MoveCardStack(c.NextCard); // Recursively loop through the stack of cards
+    }
+
+    public void SortCards()
+    {
+        for (LinkedListNode<Card> node = Cards.First; node != null; node = node.Next)
+        {
+            node.Value.PicBox.BringToFront();
+        }
+
     }
 
     public void DragEnded() {
