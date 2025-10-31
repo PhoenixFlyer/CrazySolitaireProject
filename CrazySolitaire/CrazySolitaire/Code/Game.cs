@@ -556,43 +556,48 @@ public static class Game {
     // give a hint
     public static void GiveHint() {
         bool endHint = false;
-        foreach (var tableauStack in TableauStacks)
+        // check cards in tableustacks
+        if (!endHint)
         {
-            Card curCard = tableauStack.GetBottomCard();
-            foreach (var tStack in TableauStacks)
+            foreach (var tableauStack in TableauStacks)
             {
-                Card compareCard = tStack.GetBottomCard();
-                bool suitCheck;
-                bool typeCheck;
-                if (tableauStack.Cards.Count == 0)
+                Card curCard = tableauStack.GetBottomCard();
+                foreach (var tStack in TableauStacks)
                 {
-                    typeCheck = curCard.Type == CardType.KING;
-                    tableauStack.Panel.BackColor = Color.Green;
-                    tStack.Panel.BackColor = Color.Green;
-                    endHint = true;
-                    break;
-                }
-                else
-                {
-                    suitCheck = ((int)compareCard.Suit % 2 != (int)curCard.Suit % 2);
-                    typeCheck = compareCard.Type == curCard.Type + 1;
-                    if (suitCheck && typeCheck)
+                    Card compareCard = tStack.GetBottomCard();
+                    bool suitCheck;
+                    bool typeCheck;
+                    if (tableauStack.Cards.Count == 0 && curCard is not null)
                     {
+                        typeCheck = curCard.Type == CardType.KING;
                         tableauStack.Panel.BackColor = Color.Green;
                         tStack.Panel.BackColor = Color.Green;
                         endHint = true;
                         break;
                     }
+                    else
+                    {
+                        suitCheck = ((int)compareCard.Suit % 2 != (int)curCard.Suit % 2);
+                        typeCheck = compareCard.Type == curCard.Type + 1;
+                        if (suitCheck && typeCheck)
+                        {
+                            tableauStack.Panel.BackColor = Color.Green;
+                            tStack.Panel.BackColor = Color.Green;
+                            endHint = true;
+                            break;
+                        }
 
+                    }
                 }
-            }
-            if (endHint) {
-                break;
+                if (endHint)
+                {
+                    break;
+                }
             }
         }
 
         if (!endHint) {
-            MessageBox.Show("There is no moves on the board");
+            MessageBox.Show("There is no moves on the board, but check in the foundation stacks");
         }   
 
     }
