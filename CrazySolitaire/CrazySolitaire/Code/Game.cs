@@ -88,7 +88,8 @@ public class Card {
     public Suit Suit { get; private set; }
     public bool FaceUp { get; private set; }
     public PictureBox PicBox { get; private set; }
-    public Card NextCard { get; set; }  
+    public Card NextCard { get; set; }
+    public TableauStack CurrentTableau { get; set; }
     public Bitmap PicImg {
         get => FaceUp ? Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap
                       : Resources.back_green;
@@ -181,15 +182,14 @@ public class Card {
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
                     FrmGame.CardDraggedFrom.RemCard(this);
-                    lastDropTarget.Dropped(this);
-                    PicBox.BringToFront();
+                    lastDropTarget.Dropped(this);   
                     Game.FlipOver();
                 }
                 else {
                     FrmGame.Instance.RemCard(this);
                     conBeforeDrag?.AddCard(this);
                     PicBox.Location = relLocBeforeDrag;
-                    PicBox.BringToFront();
+                    if (CurrentTableau != null) CurrentTableau.SortCards();
                 }
             }
         };
@@ -289,15 +289,8 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
          * But within typical solitaire rules, there is absolutely no way to move multiple cards from a stack without first having
          * dragged at least one card to that stack, so for now this works
         */
-        for(LinkedListNode<Card> node = Cards.First; node.Next != null; node = node.Next) node.Value.NextCard = node.Next.Value;
-        for (LinkedListNode<Card> node = Cards.First; node != null; node = node.Next)
-        {
-            node.Value.PicBox.BringToFront();
-            Panel.Refresh();
-            node.Value.PicBox.BringToFront();
-        }
-
-        
+        for (LinkedListNode<Card> node = Cards.First; node.Next != null; node = node.Next) node.Value.NextCard = node.Next.Value;
+        SortCards();
     }
 
     private void MoveCardStack(Card c)
@@ -310,7 +303,14 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Panel.AddCard(c);
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
         MoveCardStack(c.NextCard); // Recursively loop through the stack of cards
+    }
 
+    public void SortCards()
+    {
+        for (LinkedListNode<Card> node = Cards.First; node != null; node = node.Next)
+        {
+            node.Value.PicBox.BringToFront();
+        }
 
     }
 
