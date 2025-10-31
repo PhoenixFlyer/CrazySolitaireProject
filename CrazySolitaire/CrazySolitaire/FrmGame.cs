@@ -144,15 +144,21 @@ namespace CrazySolitaire {
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
+            // destroys all the picboxes of cards
+            Game.RemoveAllCards();
+
+            // resets variables
+            Game.StockReloadCount = 0;
             NumOfMoves = 0;
             lblNumMoves.Text = "0";
             stopwatch.Restart();
 
-            //FrmGame game = new();
-            //Game.game = this;
+            // new board
+            Form1_Load(sender, e);
 
-            //Form1_Load(sender, e);
-            //Load += Form1_Load;
+            // resetting talon
+            Game.Talon.ReleaseIntoDeck(Game.Deck);
+            pbStock.BackgroundImage = Resources.back_green;
         }
 
         private void btnHint_Click(object sender, EventArgs e)

@@ -628,4 +628,21 @@ public static class Game {
         };
         tmr.Start();
     }
+    public static void RemoveAllCards()
+    {
+        List<Card> allCardsInPlay = new();
+        foreach (var foundationStack in FoundationStacks)
+        {
+            allCardsInPlay.AddRange(foundationStack.Value.Cards);
+        }
+        foreach (var tableauStack in TableauStacks)
+        {
+            allCardsInPlay.AddRange(tableauStack.Cards);
+        }
+        allCardsInPlay.AddRange(Talon.Cards);
+        foreach (Card c in allCardsInPlay)
+        {
+            c.PicBox.Dispose();
+        }
+    }
 }
