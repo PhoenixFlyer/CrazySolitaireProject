@@ -183,7 +183,6 @@ public class Card {
                 Game.CallDragEndedOnAll();
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
-                    FrmGame.CardDraggedFrom.RemCard(this);
                     lastDropTarget.Dropped(this);   
                     Game.FlipOver();
                 }
@@ -191,6 +190,7 @@ public class Card {
                     FrmGame.Instance.RemCard(this);
                     conBeforeDrag?.AddCard(this);
                     PicBox.Location = relLocBeforeDrag;
+                    this.PicBox.BringToFront();
                     if (CurrentTableau != null) CurrentTableau.SortCards();
                 }
             }
@@ -254,10 +254,10 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Cards.AddLast(c);
         Panel.AddCard(c);
         c.PicBox.BringToFront();
+        c.CurrentTableau = this;
     }
 
     public List<Card> FindMoveableCards() {
-        //return Cards.Count > 0 ? [Cards.Last.Value] : [];
         return Cards.ToList();
     }
 
@@ -304,6 +304,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
+        FrmGame.CardDraggedFrom.RemCard(c);
         MoveCardStack(c.NextCard); // Recursively loop through the stack of cards
     }
 
@@ -542,14 +543,13 @@ public static class Game {
         return false;
     }*/
 
-    public static void FlipOver() { 
+    public static void FlipOver() {
         foreach (var tableauStack in TableauStacks) {
             Card c = tableauStack.GetBottomCard();
             if (c != null && !c.FaceUp)
             {
                 c.FlipOver();
             }
-
         }
     }
 
