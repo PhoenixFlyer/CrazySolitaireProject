@@ -597,20 +597,31 @@ public static class Game {
         }
 
         if (!endHint) {
-            MessageBox.Show("There is no moves on the board, but check in the foundation stacks");
+            MessageBox.Show("There are no moves on the board, but check in the foundation stacks");
         }   
 
     }
 
-    public static void Explode() {
+    // adds all of the cards in play to a List of Cards
+    private static List<Card> GetCardsInPlay()
+    {
         List<Card> allCardsInPlay = new();
-        foreach (var foundationStack in FoundationStacks) {
+        foreach (var foundationStack in FoundationStacks)
+        {
             allCardsInPlay.AddRange(foundationStack.Value.Cards);
         }
-        foreach (var tableauStack in TableauStacks) {
+        foreach (var tableauStack in TableauStacks)
+        {
             allCardsInPlay.AddRange(tableauStack.Cards);
         }
         allCardsInPlay.AddRange(Talon.Cards);
+
+        return allCardsInPlay;
+    }
+
+    public static void Explode() {
+        List<Card> allCardsInPlay = GetCardsInPlay();
+
         foreach (Card c in allCardsInPlay) {
             Point origPos = c.PicBox.Location;
             origPos.X += c.PicBox.Parent.Location.X;
@@ -620,6 +631,7 @@ public static class Game {
             c.AdjustLocation(origPos.X, origPos.Y);
             c.PicBox.BringToFront();
         }
+
         const int SPEED = 6;
         const int MORE_SPEED = 10;
         Point[] possibleExplodeVectors = [
@@ -659,18 +671,12 @@ public static class Game {
         };
         tmr.Start();
     }
+
+    // destroys the picboxes of all cards
     public static void RemoveAllCards()
     {
-        List<Card> allCardsInPlay = new();
-        foreach (var foundationStack in FoundationStacks)
-        {
-            allCardsInPlay.AddRange(foundationStack.Value.Cards);
-        }
-        foreach (var tableauStack in TableauStacks)
-        {
-            allCardsInPlay.AddRange(tableauStack.Cards);
-        }
-        allCardsInPlay.AddRange(Talon.Cards);
+        List<Card> allCardsInPlay = GetCardsInPlay();
+
         foreach (Card c in allCardsInPlay)
         {
             c.PicBox.Dispose();

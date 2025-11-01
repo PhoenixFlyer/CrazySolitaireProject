@@ -124,8 +124,10 @@ namespace CrazySolitaire {
 
         private void UpdateTime(object sender, EventArgs e)
         {
+            // gets the current time
             elapsed = stopwatch.Elapsed;
 
+            // updates the time label
             if ((int)elapsed.Seconds < 10)
                 lblTime.Text = string.Format("{0}:0{1}", (int)elapsed.Minutes, (int)elapsed.Seconds);
             else
