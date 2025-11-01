@@ -14,6 +14,8 @@ namespace CrazySolitaire {
         public static System.Windows.Forms.Timer stopwatchTimer = new();
         public TimeSpan elapsed;
         public int NumOfMoves = 0;
+        public int PowerupUses = 0;
+        public int UsedPowerups = 0;
         public static bool autoplay = false;
         public static int test = 0;
         public static int hints = 5;
@@ -138,6 +140,12 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+
+            if (NumOfMoves % 5 == 0 && UsedPowerups < 3 && PowerupUses < 3)
+            {
+                PowerupUses++;
+                lblPowerups.Text = $"Powerups Available: {PowerupUses}";
+            }
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -152,6 +160,9 @@ namespace CrazySolitaire {
             // resets variables
             Game.StockReloadCount = 0;
             NumOfMoves = 0;
+            PowerupUses = 0;
+            UsedPowerups = 0;
+            hints = 5;
             lblNumMoves.Text = "0";
             stopwatch.Restart();
 

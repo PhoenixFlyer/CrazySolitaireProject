@@ -158,13 +158,27 @@ public class Card {
                 Game.CallDragEndedOnAll();
             }
         };
-        /*
-        PicBox.Click += (sender, e) => {
-            // getting rid of this to add autoplay feature on card click
-            if (!FaceUp && Game.CanFlipOver(this)) {
+        //PicBox.Click += (sender, e) => {
+        //    // getting rid of this to add autoplay feature on card click
+        //    if (!FaceUp && Game.CanFlipOver(this)) {
+        //        FlipOver();
+
+
+        //    } 
+        //};
+        // reveal card powerup
+        PicBox.Click += (sender, e) =>
+        {
+            if (!FaceUp && FrmGame.Instance.PowerupUses > 0)
+            {
                 FlipOver();
-            } 
-        };*/
+                FrmGame.Instance.PowerupUses--;
+                FrmGame.Instance.UsedPowerups++;
+
+                if (FrmGame.Instance.PowerupUses == 0) FrmGame.Instance.lblPowerups.Text = "";                    
+                
+            }
+        };
         PicBox.MouseDown += (sender, e) => {
             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
                 FrmGame.DragCard(this);
@@ -306,6 +320,11 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
         FrmGame.CardDraggedFrom.RemCard(c);
         MoveCardStack(c.NextCard); // Recursively loop through the stack of cards
+
+        //if (c.)
+        //{
+        //    Game.FlipOver();
+        //}
     }
 
     public void SortCards()
@@ -534,14 +553,14 @@ public static class Game {
     }
 
     // getting rid of this to automatically flip over a card
-    /*public static bool CanFlipOver(Card c) {
+    public static bool CanFlipOver(Card c) {
         foreach (var tableauStack in TableauStacks) {
             if (tableauStack.GetBottomCard() == c) {
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public static void FlipOver() {
         foreach (var tableauStack in TableauStacks) {
@@ -682,4 +701,12 @@ public static class Game {
             c.PicBox.Dispose();
         }
     }
+
+    //public static void RevealPowerup()
+    //{
+    //    if (FrmGame.Instance.PowerupUses > 0)
+    //    {
+    //        FrmGame.Instance.PowerupUses--;
+    //    }
+    //}
 }
