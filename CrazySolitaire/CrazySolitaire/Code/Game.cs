@@ -119,15 +119,6 @@ public class Card {
             // adding autoplay
             if (FrmGame.autoplay && Game.IsCardMovable(this) && e.Button == MouseButtons.Left)
             {
-                FrmGame.DragCard(this);
-                dragOffset = e.Location;
-                conBeforeDrag = PicBox.Parent;
-                relLocBeforeDrag = PicBox.Location;
-                conBeforeDrag.RemCard(this);
-                FrmGame.Instance.AddCard(this);
-                PicBox.Location = e.Location;
-                PicBox.BringToFront();
-
                 var curCard = (Control)sender;
 
                 foreach (Control target in FrmGame.Instance.Controls)
@@ -145,17 +136,8 @@ public class Card {
                             Game.FlipOver();
                             break;
                         }
-                        else
-                        {
-                            FrmGame.Instance.RemCard(this);
-                            conBeforeDrag?.AddCard(this);
-                            PicBox.Location = relLocBeforeDrag;
-                            PicBox.BringToFront();
-                        }
                     }
                 }
-                FrmGame.StopDragCard(this);
-                Game.CallDragEndedOnAll();
             }
         };
         /*
@@ -575,7 +557,7 @@ public static class Game {
                         endHint = true;
                         break;
                     }
-                    else
+                    else if (curCard is not null && compareCard is not null)
                     {
                         suitCheck = ((int)compareCard.Suit % 2 != (int)curCard.Suit % 2);
                         typeCheck = compareCard.Type == curCard.Type + 1;
