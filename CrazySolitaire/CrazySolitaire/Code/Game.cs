@@ -131,9 +131,11 @@ public class Card {
                             FrmGame.StopDragCard(this);
                             Game.CallDragEndedOnAll();
                             FrmGame.CardDraggedFrom.RemCard(this);
-                            dropTarget.Dropped(this);
                             PicBox.BringToFront();
+                            dropTarget.Dropped(this);
+                        
                             Game.FlipOver();
+                            if (CurrentTableau is not null) { CurrentTableau.SortCards(); } 
                             break;
                         }
                     }
@@ -337,7 +339,7 @@ public class Talon : IFindMoveableCards, IDragFrom {
     public List<Card> FindMoveableCards() => (Cards.Count > 0 ? [Cards.Peek()] : []);
 
     public void RemCard(Card card) {
-        if (Cards.Peek() == card) {
+        if (Cards.Count > 0 && Cards.Peek() == card) {
             Cards.Pop();
         }
     }
