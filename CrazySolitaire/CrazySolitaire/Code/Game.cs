@@ -119,15 +119,6 @@ public class Card {
             // adding autoplay
             if (FrmGame.autoplay && Game.IsCardMovable(this) && e.Button == MouseButtons.Left)
             {
-                FrmGame.DragCard(this);
-                dragOffset = e.Location;
-                conBeforeDrag = PicBox.Parent;
-                relLocBeforeDrag = PicBox.Location;
-                conBeforeDrag.RemCard(this);
-                FrmGame.Instance.AddCard(this);
-                PicBox.Location = e.Location;
-                PicBox.BringToFront();
-
                 var curCard = (Control)sender;
 
                 foreach (Control target in FrmGame.Instance.Controls)
@@ -140,22 +131,15 @@ public class Card {
                             FrmGame.StopDragCard(this);
                             Game.CallDragEndedOnAll();
                             FrmGame.CardDraggedFrom.RemCard(this);
+                            PicBox.BringToFront();
                             dropTarget.Dropped(this);
-                            PicBox.BringToFront();
+                        
                             Game.FlipOver();
+                            if (CurrentTableau is not null) { CurrentTableau.SortCards(); } 
                             break;
-                        }
-                        else
-                        {
-                            FrmGame.Instance.RemCard(this);
-                            conBeforeDrag?.AddCard(this);
-                            PicBox.Location = relLocBeforeDrag;
-                            PicBox.BringToFront();
                         }
                     }
                 }
-                FrmGame.StopDragCard(this);
-                Game.CallDragEndedOnAll();
             }
         };
         //PicBox.Click += (sender, e) => {
@@ -197,6 +181,7 @@ public class Card {
                 Game.CallDragEndedOnAll();
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
+                    FrmGame.CardDraggedFrom.RemCard(this);
                     lastDropTarget.Dropped(this);   
                     Game.FlipOver();
                 }
@@ -374,7 +359,7 @@ public class Talon : IFindMoveableCards, IDragFrom {
     public List<Card> FindMoveableCards() => (Cards.Count > 0 ? [Cards.Peek()] : []);
 
     public void RemCard(Card card) {
-        if (Cards.Peek() == card) {
+        if (Cards.Count > 0 && Cards.Peek() == card) {
             Cards.Pop();
         }
     }
@@ -594,7 +579,7 @@ public static class Game {
                         endHint = true;
                         break;
                     }
-                    else
+                    else if (curCard is not null && compareCard is not null)
                     {
                         suitCheck = ((int)compareCard.Suit % 2 != (int)curCard.Suit % 2);
                         typeCheck = compareCard.Type == curCard.Type + 1;
