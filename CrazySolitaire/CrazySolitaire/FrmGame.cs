@@ -17,7 +17,6 @@ namespace CrazySolitaire {
         public int PowerupUses = 0;
         public int UsedPowerups = 0;
         public static bool autoplay = false;
-        public static int test = 0;
         public static int hints = 5;
         public static FrmSettings frmSettings = new();
 
@@ -156,6 +155,8 @@ namespace CrazySolitaire {
         {
             // destroys all the picboxes of cards
             Game.RemoveAllCards();
+
+            Game.RemoveHighlights();
 
             // resets variables
             Game.StockReloadCount = 0;
