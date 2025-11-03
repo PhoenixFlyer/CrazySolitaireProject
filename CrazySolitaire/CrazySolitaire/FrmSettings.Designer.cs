@@ -44,10 +44,10 @@
             // btnClose
             // 
             btnClose.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClose.Location = new Point(592, 428);
-            btnClose.Margin = new Padding(2);
+            btnClose.Location = new Point(677, 571);
+            btnClose.Margin = new Padding(2, 3, 2, 3);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(79, 35);
+            btnClose.Size = new Size(90, 47);
             btnClose.TabIndex = 0;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -55,10 +55,10 @@
             // 
             // btnRulse
             // 
-            btnRulse.Location = new Point(500, 51);
-            btnRulse.Margin = new Padding(2);
+            btnRulse.Location = new Point(571, 68);
+            btnRulse.Margin = new Padding(2, 3, 2, 3);
             btnRulse.Name = "btnRulse";
-            btnRulse.Size = new Size(138, 40);
+            btnRulse.Size = new Size(158, 53);
             btnRulse.TabIndex = 1;
             btnRulse.Text = "How to Play";
             btnRulse.UseVisualStyleBackColor = true;
@@ -68,10 +68,10 @@
             // 
             lblAutoplay.AutoSize = true;
             lblAutoplay.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAutoplay.Location = new Point(38, 51);
+            lblAutoplay.Location = new Point(43, 68);
             lblAutoplay.Margin = new Padding(2, 0, 2, 0);
             lblAutoplay.Name = "lblAutoplay";
-            lblAutoplay.Size = new Size(93, 25);
+            lblAutoplay.Size = new Size(118, 32);
             lblAutoplay.TabIndex = 2;
             lblAutoplay.Text = "Autoplay";
             lblAutoplay.TextAlign = ContentAlignment.MiddleCenter;
@@ -80,10 +80,10 @@
             // 
             lblMusic.AutoSize = true;
             lblMusic.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMusic.Location = new Point(38, 111);
+            lblMusic.Location = new Point(43, 148);
             lblMusic.Margin = new Padding(2, 0, 2, 0);
             lblMusic.Name = "lblMusic";
-            lblMusic.Size = new Size(64, 25);
+            lblMusic.Size = new Size(82, 32);
             lblMusic.TabIndex = 3;
             lblMusic.Text = "Music";
             lblMusic.TextAlign = ContentAlignment.MiddleCenter;
@@ -93,10 +93,10 @@
             // 
             lblMode.AutoSize = true;
             lblMode.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMode.Location = new Point(38, 168);
+            lblMode.Location = new Point(43, 224);
             lblMode.Margin = new Padding(2, 0, 2, 0);
             lblMode.Name = "lblMode";
-            lblMode.Size = new Size(112, 25);
+            lblMode.Size = new Size(141, 32);
             lblMode.TabIndex = 4;
             lblMode.Text = "Dark Mode";
             lblMode.TextAlign = ContentAlignment.MiddleCenter;
@@ -104,30 +104,30 @@
             // lblAutoplayDesc
             // 
             lblAutoplayDesc.AutoSize = true;
-            lblAutoplayDesc.Location = new Point(38, 74);
+            lblAutoplayDesc.Location = new Point(43, 99);
             lblAutoplayDesc.Margin = new Padding(2, 0, 2, 0);
             lblAutoplayDesc.Name = "lblAutoplayDesc";
-            lblAutoplayDesc.Size = new Size(157, 15);
+            lblAutoplayDesc.Size = new Size(195, 20);
             lblAutoplayDesc.TabIndex = 5;
             lblAutoplayDesc.Text = "Moves cards with just a click";
             // 
             // lblMusicDesc
             // 
             lblMusicDesc.AutoSize = true;
-            lblMusicDesc.Location = new Point(38, 134);
+            lblMusicDesc.Location = new Point(43, 179);
             lblMusicDesc.Margin = new Padding(2, 0, 2, 0);
             lblMusicDesc.Name = "lblMusicDesc";
-            lblMusicDesc.Size = new Size(77, 15);
+            lblMusicDesc.Size = new Size(97, 20);
             lblMusicDesc.TabIndex = 6;
             lblMusicDesc.Text = "Toggle Music";
             // 
             // lblModeDesc
             // 
             lblModeDesc.AutoSize = true;
-            lblModeDesc.Location = new Point(38, 197);
+            lblModeDesc.Location = new Point(43, 263);
             lblModeDesc.Margin = new Padding(2, 0, 2, 0);
             lblModeDesc.Name = "lblModeDesc";
-            lblModeDesc.Size = new Size(63, 15);
+            lblModeDesc.Size = new Size(79, 20);
             lblModeDesc.TabIndex = 7;
             lblModeDesc.Text = "Dark/Light";
             // 
@@ -135,10 +135,10 @@
             // 
             chkAutoplay.AutoSize = true;
             chkAutoplay.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkAutoplay.Location = new Point(219, 59);
-            chkAutoplay.Margin = new Padding(2);
+            chkAutoplay.Location = new Point(250, 79);
+            chkAutoplay.Margin = new Padding(2, 3, 2, 3);
             chkAutoplay.Name = "chkAutoplay";
-            chkAutoplay.Size = new Size(15, 14);
+            chkAutoplay.Size = new Size(18, 17);
             chkAutoplay.TabIndex = 8;
             chkAutoplay.UseVisualStyleBackColor = true;
             chkAutoplay.CheckedChanged += chkAutoplay_CheckedChanged;
@@ -149,10 +149,10 @@
             MusicChk.Checked = true;
             MusicChk.CheckState = CheckState.Checked;
             MusicChk.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MusicChk.Location = new Point(219, 122);
-            MusicChk.Margin = new Padding(2);
+            MusicChk.Location = new Point(250, 163);
+            MusicChk.Margin = new Padding(2, 3, 2, 3);
             MusicChk.Name = "MusicChk";
-            MusicChk.Size = new Size(15, 14);
+            MusicChk.Size = new Size(18, 17);
             MusicChk.TabIndex = 9;
             MusicChk.UseVisualStyleBackColor = true;
             MusicChk.CheckedChanged += MusicChk_CheckedChanged;
@@ -161,20 +161,20 @@
             // 
             DarkModeChk.AutoSize = true;
             DarkModeChk.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DarkModeChk.Location = new Point(219, 179);
-            DarkModeChk.Margin = new Padding(2);
+            DarkModeChk.Location = new Point(250, 239);
+            DarkModeChk.Margin = new Padding(2, 3, 2, 3);
             DarkModeChk.Name = "DarkModeChk";
-            DarkModeChk.Size = new Size(15, 14);
+            DarkModeChk.Size = new Size(18, 17);
             DarkModeChk.TabIndex = 10;
             DarkModeChk.UseVisualStyleBackColor = true;
             DarkModeChk.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // FrmSettings
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
-            ClientSize = new Size(700, 480);
+            ClientSize = new Size(800, 640);
             ControlBox = false;
             Controls.Add(DarkModeChk);
             Controls.Add(MusicChk);
@@ -187,7 +187,7 @@
             Controls.Add(lblAutoplay);
             Controls.Add(btnRulse);
             Controls.Add(btnClose);
-            Margin = new Padding(2);
+            Margin = new Padding(2, 3, 2, 3);
             MaximizeBox = false;
             Name = "FrmSettings";
             ShowIcon = false;
@@ -210,7 +210,7 @@
         private Label lblMusicDesc;
         private Label lblModeDesc;
         private CheckBox chkAutoplay;
-        private CheckBox MusicChk;
         private CheckBox DarkModeChk;
+        public CheckBox MusicChk;
     }
 }

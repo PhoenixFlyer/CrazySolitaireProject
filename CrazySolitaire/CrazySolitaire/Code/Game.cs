@@ -106,8 +106,10 @@ public class Card {
         SetupPicBox();
     }
 
-    private void SetupPicBox() {
-        PicBox = new() {
+    private void SetupPicBox()
+    {
+        PicBox = new()
+        {
             Width = 90,
             Height = 126,
             BackgroundImageLayout = ImageLayout.Stretch,
@@ -115,7 +117,8 @@ public class Card {
             BackgroundImage = PicImg
         };
 
-        PicBox.MouseClick += (sender, e) => {
+        PicBox.MouseClick += (sender, e) =>
+        {
             // adding autoplay
             if (FrmGame.autoplay && Game.IsCardMovable(this) && e.Button == MouseButtons.Left)
             {
@@ -133,24 +136,42 @@ public class Card {
                             FrmGame.CardDraggedFrom.RemCard(this);
                             PicBox.BringToFront();
                             dropTarget.Dropped(this);
-                        
+
                             Game.FlipOver();
-                            if (CurrentTableau is not null) { CurrentTableau.SortCards(); } 
+                            if (CurrentTableau is not null) { CurrentTableau.SortCards(); }
                             break;
                         }
                     }
                 }
             }
         };
-        /*
-        PicBox.Click += (sender, e) => {
-            // getting rid of this to add autoplay feature on card click
-            if (!FaceUp && Game.CanFlipOver(this)) {
+        //PicBox.Click += (sender, e) => {
+        //    // getting rid of this to add autoplay feature on card click
+        //    if (!FaceUp && Game.CanFlipOver(this)) {
+        //        FlipOver();
+
+
+        //    } 
+        //};
+        // reveal card powerup
+        PicBox.Click += (sender, e) =>
+        {
+            if (!FaceUp && FrmGame.Instance.PowerupUses > 0)
+            {
                 FlipOver();
-            } 
-        };*/
-        PicBox.MouseDown += (sender, e) => {
-            if (e.Button == MouseButtons.Left && Game.IsCardMovable(this)) {
+                FrmGame.Instance.PowerupUses--;
+                FrmGame.Instance.UsedPowerups++;
+
+                if (FrmGame.Instance.PowerupUses == 0)
+                    FrmGame.Instance.lblPowerups.Text = "";
+                else
+                    FrmGame.Instance.lblPowerups.Text = $"Powerups Available: {FrmGame.Instance.PowerupUses}";
+            }
+        };
+        PicBox.MouseDown += (sender, e) =>
+        {
+            if (e.Button == MouseButtons.Left && Game.IsCardMovable(this))
+            {
                 FrmGame.DragCard(this);
                 dragOffset = e.Location;
                 conBeforeDrag = PicBox.Parent;
@@ -161,17 +182,21 @@ public class Card {
                 PicBox.BringToFront();
             }
         };
-        PicBox.MouseUp += (sender, e) => {
-            if (FrmGame.IsDraggingCard(this)) {
+        PicBox.MouseUp += (sender, e) =>
+        {
+            if (FrmGame.IsDraggingCard(this))
+            {
                 FrmGame.StopDragCard(this);
                 Game.CallDragEndedOnAll();
 
-                if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
+                if (lastDropTarget is not null && lastDropTarget.CanDrop(this))
+                {
                     FrmGame.CardDraggedFrom.RemCard(this);
-                    lastDropTarget.Dropped(this);   
+                    lastDropTarget.Dropped(this);
                     Game.FlipOver();
                 }
-                else {
+                else
+                {
                     FrmGame.Instance.RemCard(this);
                     conBeforeDrag?.AddCard(this);
                     PicBox.Location = relLocBeforeDrag;
@@ -180,8 +205,10 @@ public class Card {
                 }
             }
         };
-        PicBox.MouseMove += (sender, e) => {
-            if (FrmGame.CurDragCard == this) {
+        PicBox.MouseMove += (sender, e) =>
+        {
+            if (FrmGame.CurDragCard == this)
+            {
 
                 var dragged = (Control)sender;
                 Point screenPos = dragged.PointToScreen(e.Location);
@@ -193,15 +220,19 @@ public class Card {
                 Control target = FrmGame.Instance.GetChildAtPoint(dragged.Parent.PointToClient(screenPos));
 
                 // Avoid detecting the dragged control itself
-                if (target is not null && target != dragged) {
+                if (target is not null && target != dragged)
+                {
                     var dropTarget = Game.FindDropTarget(target);
-                    if (dropTarget is null) {
+                    if (dropTarget is null)
+                    {
                         Game.CallDragEndedOnAll();
                     }
-                    else if (dropTarget != lastDropTarget) {
+                    else if (dropTarget != lastDropTarget)
+                    {
                         lastDropTarget?.DragEnded();
                     }
-                    if (dropTarget != FrmGame.CardDraggedFrom as IDropTarget) {
+                    if (dropTarget != FrmGame.CardDraggedFrom as IDropTarget)
+                    {
                         dropTarget?.DragOver(this);
                         lastDropTarget = dropTarget;
                     }
@@ -214,7 +245,7 @@ public class Card {
             }
         };
     }
-
+    
     public void FlipOver() {
         FaceUp = !FaceUp;
         PicBox.BackgroundImage = PicImg;
@@ -476,7 +507,8 @@ public static class Game {
             c.AdjustLocation(0, i * VERT_OFFSET);
             TableauStacks[i].AddCard(c);
         }
-        MySoundPlayer.Play();
+        if (FrmGame.frmSettings.MusicChk.Checked) MySoundPlayer.Play();
+        else MySoundPlayer.Stop();
     }
 
     public static bool IsCardMovable(Card c) {
@@ -532,14 +564,14 @@ public static class Game {
     }
 
     // getting rid of this to automatically flip over a card
-    /*public static bool CanFlipOver(Card c) {
+    public static bool CanFlipOver(Card c) {
         foreach (var tableauStack in TableauStacks) {
             if (tableauStack.GetBottomCard() == c) {
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public static void FlipOver() {
         foreach (var tableauStack in TableauStacks) {
@@ -679,5 +711,26 @@ public static class Game {
         {
             c.PicBox.Dispose();
         }
+    }
+    
+    // finds all panels that don't have a transparent backcolor and sets them to be transparent
+    public static void RemoveHighlights()
+    {
+        List<Panel> panels = new();
+
+        foreach (var foundationStack in FoundationStacks)
+        {
+            if (foundationStack.Value.Panel.BackColor != Color.Transparent)
+                panels.Add(foundationStack.Value.Panel);
+        }
+
+        foreach (var tableauStack in TableauStacks)
+        {
+            if (tableauStack.Panel.BackColor != Color.Transparent)
+                panels.Add(tableauStack.Panel);
+        }
+
+        foreach (Panel panel in panels)
+            panel.BackColor = Color.Transparent;
     }
 }
