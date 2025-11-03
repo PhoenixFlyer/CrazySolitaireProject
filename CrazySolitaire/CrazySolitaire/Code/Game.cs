@@ -167,6 +167,7 @@ public class Card {
                 Game.CallDragEndedOnAll();
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this)) {
+                    FrmGame.CardDraggedFrom.RemCard(this);
                     lastDropTarget.Dropped(this);   
                     Game.FlipOver();
                 }
