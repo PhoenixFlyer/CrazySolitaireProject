@@ -290,7 +290,20 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
          * But within typical solitaire rules, there is absolutely no way to move multiple cards from a stack without first having
          * dragged at least one card to that stack, so for now this works
         */
-        for (LinkedListNode<Card> node = Cards.First; node.Next != null; node = node.Next) node.Value.NextCard = node.Next.Value;
+        for (LinkedListNode<Card> node = Cards.First; node != null; node = node.Next)
+        {
+            if (node.Next != null) node.Value.NextCard = node.Next.Value;
+            else node.Value.NextCard = null;
+        }
+
+        object o = FrmGame.CardDraggedFrom;
+        if (o is TableauStack OldStack){
+            for (LinkedListNode<Card> node = OldStack.Cards.First; node != null; node = node.Next)
+            {
+                if (node.Next != null) node.Value.NextCard = node.Next.Value;
+                else node.Value.NextCard = null;
+            }
+        }
         SortCards();
     }
 
