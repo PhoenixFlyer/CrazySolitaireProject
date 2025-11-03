@@ -19,7 +19,7 @@ namespace CrazySolitaire {
         public static bool autoplay = false;
         public static int test = 0;
         public static int hints = 5;
-        FrmSettings frmSettings = new();
+        public static FrmSettings frmSettings = new();
 
         protected override CreateParams CreateParams
         {

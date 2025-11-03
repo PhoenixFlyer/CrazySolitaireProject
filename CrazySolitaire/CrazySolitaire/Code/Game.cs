@@ -495,7 +495,8 @@ public static class Game {
             c.AdjustLocation(0, i * VERT_OFFSET);
             TableauStacks[i].AddCard(c);
         }
-        MySoundPlayer.Play();
+        if (FrmGame.frmSettings.MusicChk.Checked) MySoundPlayer.Play();
+        else MySoundPlayer.Stop();
     }
 
     public static bool IsCardMovable(Card c) {
