@@ -457,6 +457,14 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 }
 
+public class Snapshot
+{
+    public Dictionary<Suit, FoundationStack> FoundationStacks { get; set; }
+    public TableauStack[] TableauStacks;
+    public Talon Talon { get; set; }
+    public int StockReloadCount { get; set; } = 0;
+}
+
 public static class Game {
     public static Form TitleForm { get; set; }
     public static Form GameForm { get; set; }
