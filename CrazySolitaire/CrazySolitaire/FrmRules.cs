@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,15 @@ namespace CrazySolitaire
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FrmRules_Load(object sender, EventArgs e)
+        {
+            using (var ms = new MemoryStream(Properties.Resources.HowToPlay))
+            {
+                txtRules.LoadFile(ms, RichTextBoxStreamType.RichText);
+            }
+
         }
     }
 }

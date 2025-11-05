@@ -63,6 +63,7 @@
             Name = "FrmRules";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmRules";
+            Load += FrmRules_Load;
             ResumeLayout(false);
         }
 
