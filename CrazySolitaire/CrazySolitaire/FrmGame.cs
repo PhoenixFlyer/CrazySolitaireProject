@@ -217,11 +217,34 @@ namespace CrazySolitaire {
         private void btnGamble_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Gamble Button has been clicked!");
+            Random random = new();
+            int gambledNumber = random.Next(1, 5);
+            switch (gambledNumber) {
+                case 1:
+                    MessageBox.Show("Sorry, gambling is risky! You immediatly lost the game!");
+                    Game.Explode();
+                    FrmYouLose frmYouLose = new();
+                    frmYouLose.Show();
+                    Hide();
+                    break;
+                case 2:
+                    MessageBox.Show("Congratulations! You immediatly won the game!");
+                    // win game function
+                    break;
+                case 3:
+                    MessageBox.Show("Gambling is fun and can sometimes give hints!");
+                    Game.GiveHint();
+                    break;
+                case 4:
+                    MessageBox.Show("Here's an extra power up!");
+                    PowerupUses++;
+                    break;
+            }
         }
 
         private void UndoBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Undo button clicked!");
+            MessageBox.Show("Undo button clicked! This is very hard to do so it didn't get finished.");
         }
     }
 }
