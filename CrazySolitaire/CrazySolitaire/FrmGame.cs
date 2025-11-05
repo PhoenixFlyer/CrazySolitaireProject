@@ -213,5 +213,15 @@ namespace CrazySolitaire {
                 MessageBox.Show("No more hints");
             }
         }
+
+        private void btnGamble_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Gamble Button has been clicked!");
+        }
+
+        private void UndoBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Undo button clicked!");
+        }
     }
 }

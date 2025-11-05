@@ -53,6 +53,7 @@
             lblNumOfHints = new Label();
             lblPowerups = new Label();
             ExplodeTimer = new System.Windows.Forms.Timer(components);
+            btnGamble = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -134,13 +135,13 @@
             UndoBtn.BackColor = Color.Transparent;
             UndoBtn.BackgroundImage = Properties.Resources.Undo;
             UndoBtn.BackgroundImageLayout = ImageLayout.Stretch;
-            UndoBtn.Location = new Point(99, 566);
+            UndoBtn.Location = new Point(812, 11);
             UndoBtn.Margin = new Padding(2);
             UndoBtn.Name = "UndoBtn";
             UndoBtn.Size = new Size(70, 60);
             UndoBtn.TabIndex = 13;
             UndoBtn.UseVisualStyleBackColor = false;
-            UndoBtn.Visible = false;
+            UndoBtn.Click += UndoBtn_Click;
             // 
             // panTableauStack_1
             // 
@@ -224,11 +225,12 @@
             // btnSettings
             // 
             btnSettings.BackColor = Color.Transparent;
-            btnSettings.Image = Properties.Resources.GearIcon;
-            btnSettings.Location = new Point(880, 555);
+            btnSettings.BackgroundImage = (Image)resources.GetObject("btnSettings.BackgroundImage");
+            btnSettings.BackgroundImageLayout = ImageLayout.Zoom;
+            btnSettings.Location = new Point(885, 546);
             btnSettings.Margin = new Padding(2);
             btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(86, 74);
+            btnSettings.Size = new Size(76, 80);
             btnSettings.TabIndex = 6;
             btnSettings.UseVisualStyleBackColor = false;
             btnSettings.Click += btnSettings_Click;
@@ -236,10 +238,10 @@
             // btnNewGame
             // 
             btnNewGame.Font = new Font("Old English Text MT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnNewGame.Location = new Point(773, 555);
+            btnNewGame.Location = new Point(791, 546);
             btnNewGame.Margin = new Padding(3, 2, 3, 2);
             btnNewGame.Name = "btnNewGame";
-            btnNewGame.Size = new Size(86, 74);
+            btnNewGame.Size = new Size(76, 80);
             btnNewGame.TabIndex = 9;
             btnNewGame.Text = "New Game";
             btnNewGame.UseVisualStyleBackColor = true;
@@ -248,8 +250,8 @@
             // btnHint
             // 
             btnHint.BackColor = Color.Transparent;
-            btnHint.BackgroundImageLayout = ImageLayout.None;
-            btnHint.Image = (Image)resources.GetObject("btnHint.Image");
+            btnHint.BackgroundImage = Properties.Resources.HintIconjpg;
+            btnHint.BackgroundImageLayout = ImageLayout.Zoom;
             btnHint.Location = new Point(9, 566);
             btnHint.Margin = new Padding(2);
             btnHint.Name = "btnHint";
@@ -281,12 +283,26 @@
             // 
             ExplodeTimer.Interval = 1000;
             // 
+            // btnGamble
+            // 
+            btnGamble.BackColor = Color.Transparent;
+            btnGamble.BackgroundImage = Properties.Resources.GambleIcon;
+            btnGamble.BackgroundImageLayout = ImageLayout.Zoom;
+            btnGamble.Location = new Point(895, 11);
+            btnGamble.Margin = new Padding(2);
+            btnGamble.Name = "btnGamble";
+            btnGamble.Size = new Size(70, 60);
+            btnGamble.TabIndex = 14;
+            btnGamble.UseVisualStyleBackColor = false;
+            btnGamble.Click += btnGamble_Click;
+            // 
             // FrmGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(976, 633);
+            Controls.Add(btnGamble);
             Controls.Add(UndoBtn);
             Controls.Add(lblPowerups);
             Controls.Add(lblNumOfHints);
@@ -345,5 +361,6 @@
         public Label lblNumMoves;
         private Button UndoBtn;
         private System.Windows.Forms.Timer ExplodeTimer;
+        private Button btnGamble;
     }
 }
