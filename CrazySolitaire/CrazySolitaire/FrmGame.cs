@@ -14,10 +14,13 @@ namespace CrazySolitaire {
         public static System.Windows.Forms.Timer stopwatchTimer = new();
         public TimeSpan elapsed;
         public int NumOfMoves = 0;
+        public int PowerupUses = 0;
+        public int UsedPowerups = 0;
         public static bool autoplay = false;
-        public static int test = 0;
         public static int hints = 5;
-        FrmSettings frmSettings = new();
+        public static FrmSettings frmSettings = new();
+        public static FrmQTE frmqte = new();
+        public static Timer DeathTimer = new();
 
         protected override CreateParams CreateParams
         {
@@ -32,6 +35,8 @@ namespace CrazySolitaire {
         public FrmGame()
         {
             InitializeComponent();
+            DeathTimer.Tick += new EventHandler(DeathTimer_Tick);
+            DeathTimer.Interval = 1000;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,11 +73,10 @@ namespace CrazySolitaire {
                 Game.StockReloadCount++;
                 if (Game.StockReloadCount > 3)
                 {
-                    Game.Explode();
-                    MessageBox.Show("You computer has been infected with ransomware", "You have been infected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    FrmYouLose frmYouLose = new();
-                    frmYouLose.Show();
-                    Hide();
+                    Random rng = new Random();
+                    frmqte.Location = new Point(rng.Next(0, this.Width), rng.Next(0, this.Height));
+                    frmqte.Show();
+                    DeathTimer.Start();
                 }
                 else
                 {
@@ -103,6 +107,27 @@ namespace CrazySolitaire {
                 }
             }
             UpdateMoves();
+        }
+
+        public static void StopDeath()
+        {
+            DeathTimer.Stop();
+            ResetStock();
+        }
+
+        public void DeathTimer_Tick(object sender, EventArgs e)
+        {
+            Game.Explode();
+            MessageBox.Show("Your computer has been infected with ransomware", "You have been infected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            FrmYouLose frmYouLose = new();
+            frmYouLose.Show();
+            Hide();
+            DeathTimer.Stop();
+        }
+
+        public static void ResetStock()
+        {
+            Game.StockReloadCount = 0;
         }
 
         public static void DragCard(Card c)
@@ -138,7 +163,14 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+
+            if (NumOfMoves % 5 == 0 && UsedPowerups < 3 && PowerupUses < 3)
+            {
+                PowerupUses++;
+                lblPowerups.Text = $"Powerups Available: {PowerupUses}";
+            }
         }
+
         private void btnSettings_Click(object sender, EventArgs e)
         {
             frmSettings.Show();
@@ -149,9 +181,14 @@ namespace CrazySolitaire {
             // destroys all the picboxes of cards
             Game.RemoveAllCards();
 
+            Game.RemoveHighlights();
+
             // resets variables
             Game.StockReloadCount = 0;
             NumOfMoves = 0;
+            PowerupUses = 0;
+            UsedPowerups = 0;
+            hints = 5;
             lblNumMoves.Text = "0";
             stopwatch.Restart();
 
@@ -171,8 +208,9 @@ namespace CrazySolitaire {
                 lblNumOfHints.Text = hints.ToString();
                 Game.GiveHint();
             }
-            else {
-                MessageBox.Show("No more hints");            
+            else
+            {
+                MessageBox.Show("No more hints");
             }
         }
     }

@@ -58,12 +58,14 @@ namespace CrazySolitaire
                 FrmGame.Instance.BackColor = Color.FromArgb(255, 0, 16, 0);
                 FrmGame.Instance.lblTime.ForeColor = Color.White;
                 FrmGame.Instance.lblMoves.ForeColor = Color.White;
+                FrmGame.Instance.lblNumMoves.ForeColor = Color.White;
             }
             else // light mode
             { 
                 FrmGame.Instance.BackColor = Color.FromArgb(255, 0, 64, 0);
                 FrmGame.Instance.lblTime.ForeColor = Color.Black;
                 FrmGame.Instance.lblMoves.ForeColor = Color.Black;
+                FrmGame.Instance.lblNumMoves.ForeColor = Color.Black;
             }
         }
     }
