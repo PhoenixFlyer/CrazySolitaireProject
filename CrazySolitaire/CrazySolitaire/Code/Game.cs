@@ -447,9 +447,10 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 
     public void RemCard(Card card) {
-        List<Card> cards = Cards.ToList<Card>();
+        Cards.Pop();
+        /*List<Card> cards = Cards.ToList<Card>();
         cards.Remove(card);
-        Cards = new Stack<Card>(cards);
+        Cards = new Stack<Card>(cards);*/
     }
 
     public void AddCard(Card card) {

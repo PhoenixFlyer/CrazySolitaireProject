@@ -491,16 +491,6 @@ namespace CrazySolitaire.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BackArrowIcon {
-            get {
-                object obj = ResourceManager.GetObject("BackArrowIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream Balatro {
@@ -562,9 +552,19 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GearIcon {
+        internal static System.Drawing.Bitmap GambleIcon {
             get {
-                object obj = ResourceManager.GetObject("GearIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("GambleIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HintIconjpg {
+            get {
+                object obj = ResourceManager.GetObject("HintIconjpg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
