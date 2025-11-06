@@ -89,6 +89,7 @@ public class Card {
     public bool FaceUp { get; private set; }
     public PictureBox PicBox { get; private set; }
     public Card NextCard { get; set; }
+    //public Card PreviousCard { get; set; } // used only to force the parent to "forget" when moving fixme
     public TableauStack CurrentTableau { get; set; }
     public Bitmap PicImg {
         get => FaceUp ? Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap
@@ -440,6 +441,15 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
         FrmGame.Instance.UpdateMoves();
+        object o = FrmGame.CardDraggedFrom;
+        if (o is TableauStack OldStack)
+        {
+            for (LinkedListNode<Card> node = OldStack.Cards.First; node != null; node = node.Next)
+            {
+                if (node.Next != null) node.Value.NextCard = node.Next.Value;
+                else node.Value.NextCard = null;
+            }
+        }
     }
 
     public void DragEnded() {
@@ -447,10 +457,10 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 
     public void RemCard(Card card) {
-        Cards.Pop();
-        /*List<Card> cards = Cards.ToList<Card>();
+        //Cards.Pop();
+        List<Card> cards = Cards.ToList<Card>();
         cards.Remove(card);
-        Cards = new Stack<Card>(cards);*/
+        Cards = new Stack<Card>(cards);
     }
 
     public void AddCard(Card card) {
