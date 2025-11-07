@@ -552,6 +552,14 @@ public static class Game {
             c.AdjustLocation(0, i * VERT_OFFSET);
             TableauStacks[i].AddCard(c);
         }
+        for(int i = 1; i < TableauStacks.Length; i++)
+        {
+            for (LinkedListNode<Card> node = TableauStacks[i].Cards.First; node != null; node = node.Next)
+            {
+                if (node.Next != null) node.Value.NextCard = node.Next.Value;
+                else node.Value.NextCard = null;
+            }
+        }
         if (FrmGame.frmSettings.MusicChk.Checked) MySoundPlayer.Play();
         else MySoundPlayer.Stop();
     }
