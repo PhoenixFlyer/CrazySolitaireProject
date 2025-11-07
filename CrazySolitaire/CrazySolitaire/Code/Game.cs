@@ -157,16 +157,29 @@ public class Card {
         // reveal card powerup
         PicBox.Click += (sender, e) =>
         {
-            if (!FaceUp && FrmGame.Instance.PowerupUses > 0)
+            if (!FaceUp && (FrmGame.Instance.PowerupUses > 0 || FrmGame.Instance.ExtraPowerups > 0))
             {
                 FlipOver();
-                FrmGame.Instance.PowerupUses--;
-                FrmGame.Instance.UsedPowerups++;
+                int PowerupHolder = FrmGame.Instance.PowerupUses;
+                bool ExtraUsed = false;
 
-                if (FrmGame.Instance.PowerupUses == 0)
+                if (FrmGame.Instance.PowerupUses > 0)
+                {
+                    FrmGame.Instance.PowerupUses--;
+                    FrmGame.Instance.UsedPowerups++;
+                }
+                else if (FrmGame.Instance.ExtraPowerups > 0)
+                {
+                    FrmGame.Instance.ExtraPowerups--;
+                    ExtraUsed = true;
+                }
+
+                if (FrmGame.Instance.PowerupUses == 0 && FrmGame.Instance.ExtraPowerups == 0)
                     FrmGame.Instance.lblPowerups.Text = "";
+                else if (ExtraUsed)
+                    FrmGame.Instance.lblPowerups.Text = $"Powerups Available: {PowerupHolder + FrmGame.Instance.ExtraPowerups}";
                 else
-                    FrmGame.Instance.lblPowerups.Text = $"Powerups Available: {FrmGame.Instance.PowerupUses}";
+                    FrmGame.Instance.lblPowerups.Text = $"Powerups Available: {FrmGame.Instance.PowerupUses + FrmGame.Instance.ExtraPowerups}";
             }
         };
         PicBox.MouseDown += (sender, e) =>
@@ -675,7 +688,10 @@ public static class Game {
             cards.AddRange(foundationStack.Value.Cards);
 
         if (cards.Count == 52)
+        {
+            FrmGame.Instance.Enabled = false;
             FrmGame.frmWin.Show();
+        }
     }
 
     public static void Explode() {
