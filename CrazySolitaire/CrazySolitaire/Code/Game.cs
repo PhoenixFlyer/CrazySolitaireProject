@@ -192,10 +192,35 @@ public class Card {
 
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this))
                 {
-                    FrmGame.CardDraggedFrom.RemCard(this);
-                    lastDropTarget.Dropped(this);
-                    Game.FlipOver();
+                    FoundationStack fs = lastDropTarget as FoundationStack;
+                    if (fs != null) // an extra check is needed if we're dragging to a foundation stack
+                    {
+                        if (this.NextCard == null)
+                        {
+                            FrmGame.CardDraggedFrom.RemCard(this);
+                            lastDropTarget.Dropped(this);
+                            Game.FlipOver();
+                        }
+                        else
+                        {
+                            FrmGame.Instance.RemCard(this);
+                            conBeforeDrag?.AddCard(this);
+                            PicBox.Location = relLocBeforeDrag;
+                            this.PicBox.BringToFront();
+                            if (CurrentTableau != null) CurrentTableau.SortCards();
+                        }
+                    }
+                    else
+                    {
+                        FrmGame.CardDraggedFrom.RemCard(this);
+                        lastDropTarget.Dropped(this);
+                        Game.FlipOver();
+                    }
+                    //FrmGame.CardDraggedFrom.RemCard(this);
+                    //lastDropTarget.Dropped(this);
+                    //Game.FlipOver();
                 }
+                
                 else
                 {
                     FrmGame.Instance.RemCard(this);
@@ -435,6 +460,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
     }
 
     public void Dropped(Card c) {
+
         Cards.Push(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
