@@ -16,9 +16,11 @@ namespace CrazySolitaire {
         public int NumOfMoves = 0;
         public int PowerupUses = 0;
         public int UsedPowerups = 0;
+        public int ExtraPowerups = 0;
         public static bool autoplay = false;
         public static int hints = 5;
         public static FrmSettings frmSettings = new();
+        public static FrmWin frmWin = new();
         public static FrmQTE frmqte = new();
         public static Timer DeathTimer = new();
 
@@ -163,20 +165,29 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+            Game.CheckWin();
 
             if (NumOfMoves % 5 == 0 && (UsedPowerups + PowerupUses) < 3)
             {
                 PowerupUses++;
-                lblPowerups.Text = $"Powerups Available: {PowerupUses}";
+                lblPowerups.Text = $"Powerups Available: {PowerupUses + ExtraPowerups}";
             }
         }
+
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
             frmSettings.Show();
         }
 
-        private void btnNewGame_Click(object sender, EventArgs e)
+        //public void CheckWin()
+        //{
+        //    // if the stock is empty, if the talon is empty, if the tableau stacks are all empty, then show the win screen
+
+        //    frmWin.Show();
+        //}
+
+        public void btnNewGame_Click(object sender, EventArgs e)
         {
             // destroys all the picboxes of cards
             Game.RemoveAllCards();
@@ -188,8 +199,10 @@ namespace CrazySolitaire {
             NumOfMoves = 0;
             PowerupUses = 0;
             UsedPowerups = 0;
+            ExtraPowerups = 0;
             hints = 5;
             lblNumMoves.Text = "0";
+            lblPowerups.Text = "";
             stopwatch.Restart();
 
             // new board
@@ -198,6 +211,8 @@ namespace CrazySolitaire {
             // resetting talon
             Game.Talon.ReleaseIntoDeck(Game.Deck);
             pbStock.BackgroundImage = Resources.back_green;
+
+            Instance.Enabled = true;
         }
 
         private void btnHint_Click(object sender, EventArgs e)
@@ -229,15 +244,17 @@ namespace CrazySolitaire {
                     break;
                 case 2:
                     MessageBox.Show("Congratulations! You immediatly won the game!");
-                    // win game function
+                    frmWin.Show();
+                    Instance.Enabled = false;
                     break;
                 case 3:
                     MessageBox.Show("Gambling is fun and can sometimes give hints!");
                     Game.GiveHint();
                     break;
                 case 4:
-                    MessageBox.Show("Here's an extra power up!");
-                    PowerupUses++;
+                    MessageBox.Show("Here's an extra powerup!");
+                    ExtraPowerups++;
+                    lblPowerups.Text = $"Powerups Available: {PowerupUses + ExtraPowerups}";
                     break;
             }
         }

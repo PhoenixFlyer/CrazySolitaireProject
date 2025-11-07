@@ -512,6 +512,16 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Confetti {
+            get {
+                object obj = ResourceManager.GetObject("Confetti", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FoundationStackBg_Clubs {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Clubs", resourceCulture);
