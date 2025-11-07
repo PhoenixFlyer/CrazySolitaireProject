@@ -164,7 +164,7 @@ namespace CrazySolitaire {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
 
-            if (NumOfMoves % 5 == 0 && UsedPowerups < 3 && PowerupUses < 3)
+            if (NumOfMoves % 5 == 0 && (UsedPowerups + PowerupUses) < 3)
             {
                 PowerupUses++;
                 lblPowerups.Text = $"Powerups Available: {PowerupUses}";

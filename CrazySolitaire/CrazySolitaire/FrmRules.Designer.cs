@@ -34,18 +34,20 @@
             // 
             // txtRules
             // 
-            txtRules.Location = new Point(12, 23);
+            txtRules.Location = new Point(10, 18);
+            txtRules.Margin = new Padding(2, 2, 2, 2);
             txtRules.Name = "txtRules";
             txtRules.ReadOnly = true;
-            txtRules.Size = new Size(681, 702);
+            txtRules.Size = new Size(587, 562);
             txtRules.TabIndex = 0;
             txtRules.Text = "";
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(610, 745);
+            btnClose.Location = new Point(488, 596);
+            btnClose.Margin = new Padding(2, 2, 2, 2);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(136, 43);
+            btnClose.Size = new Size(109, 34);
             btnClose.TabIndex = 1;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -53,13 +55,14 @@
             // 
             // FrmRules
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(778, 798);
+            ClientSize = new Size(622, 638);
             Controls.Add(btnClose);
             Controls.Add(txtRules);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "FrmRules";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmRules";
