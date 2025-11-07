@@ -19,6 +19,7 @@ namespace CrazySolitaire {
         public static bool autoplay = false;
         public static int hints = 5;
         public static FrmSettings frmSettings = new();
+        public static FrmWin frmWin = new();
         public static FrmQTE frmqte = new();
         public static Timer DeathTimer = new();
 
@@ -163,12 +164,14 @@ namespace CrazySolitaire {
         {
             NumOfMoves++;
             lblNumMoves.Text = NumOfMoves.ToString();
+            Game.CheckWin();
 
             if (NumOfMoves % 5 == 0 && (UsedPowerups + PowerupUses) < 3)
             {
                 PowerupUses++;
                 lblPowerups.Text = $"Powerups Available: {PowerupUses}";
             }
+
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
@@ -176,7 +179,14 @@ namespace CrazySolitaire {
             frmSettings.Show();
         }
 
-        private void btnNewGame_Click(object sender, EventArgs e)
+        //public void CheckWin()
+        //{
+        //    // if the stock is empty, if the talon is empty, if the tableau stacks are all empty, then show the win screen
+
+        //    frmWin.Show();
+        //}
+
+        public void btnNewGame_Click(object sender, EventArgs e)
         {
             // destroys all the picboxes of cards
             Game.RemoveAllCards();

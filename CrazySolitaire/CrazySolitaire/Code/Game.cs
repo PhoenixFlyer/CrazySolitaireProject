@@ -668,6 +668,16 @@ public static class Game {
         return allCardsInPlay;
     }
 
+    public static void CheckWin()
+    {
+        List<Card> cards = new();
+        foreach (var foundationStack in FoundationStacks)
+            cards.AddRange(foundationStack.Value.Cards);
+
+        if (cards.Count == 52)
+            FrmGame.frmWin.Show();
+    }
+
     public static void Explode() {
         List<Card> allCardsInPlay = GetCardsInPlay();
 
